@@ -1,0 +1,358 @@
+
+
+\chapter*{A - Github repository}
+\addcontentsline{toc}{chapter}{\protect\numberline{}A - Github repository} 
+
+All code and latex-files used in this document are included in the Github repository linked below. Further explanations are given in the readme-file. 
+
+
+\subsection*{Github repository link}
+\begin{itemize}
+    \item \url{GITHUBLINK}
+    \todo{GITHUB}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter*{B - User Survey Results}
+\addcontentsline{toc}{chapter}{\protect\numberline{}B - User Survey Results} 
+
+\label{appendix:user_survey}
+%For included tables and figures renew the numbering such that they are numbered by the appendix they are attached to and not to the conclusion chapter
+\renewcommand{\thefigure}{B.\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{B.\arabic{table}}
+\setcounter{table}{0}
+
+\section*{\large{B1 - Survey participants}}
+\vspace*{1cm}
+
+\begin{table}[ht!]
+\centering
+    \begin{tabular}{ m{4cm} m{2.5cm} m{4cm}} 
+    \toprule
+    \toprule
+    \textbf{Name} & \textbf{Type} & \textbf{District} \\
+    \midrule
+    Chiwoza   & Health    & Lilongwe  \\
+    Chimwamkango   & Health & Lilongwe  \\
+    Mitondo   & Health    & Ntchisi  \\
+    Chinyama   & Health    & Kasungu  \\
+    Emsizini   & Health    & Mzuzu  \\
+    Livwezi   & Health    & Kasungu  \\
+    Choma   & Health    & Mzuzu  \\
+    Luwawa   & Health    & Mzimba\\
+    Matuli   & Health    & Mzuzu  \\
+    Namiyasi   & School    & Mangochi \\
+    Nsanje   & Health    & Dowa  \\
+    Lemwe   & Health    & Lilongwe  \\
+    Katewe   & School    & Dedza  \\
+    Mteneza   & School    & Mangochi  \\
+    Mndinda   & Health    & Ntchisi  \\
+    Chikuluma   & Health    & Machinga  \\
+    Mangochi   & Health    & Mangochi  \\
+    
+    \bottomrule
+    \bottomrule
+    \end{tabular}
+\caption[User survey- Participating sites]{All sites surveyed.}
+\label{tab:us_participants}
+\end{table}
+
+\newpage
+\section*{\large{B2 - System overview}}
+\vspace*{1cm}
+
+\textbf{Q1}: Is the solar power system at your facility working?\\
+
+\noindent\textbf{Q2}: How satisfied(1-5) are you with the solar power system at your facility?\\
+
+\noindent\textbf{Q3}: Are staff houses powered?
+
+
+\begin{table}[ht!]
+\centering
+    \begin{tabular}{ m{4cm} m{1.5cm} m{1.5cm} m{1.5cm} } 
+    \toprule
+    \toprule
+    \textbf{Name} &  \textbf{Q1} & \textbf{Q2} & \textbf{Q3} \\
+    \midrule
+    Chiwoza         & Yes & 5 & Yes  \\
+    Chimwamkango    & Yes & 5 & Yes  \\
+    Mitondo         & Yes & 5 & Yes  \\
+    Chinyama        & Yes & 5 & Yes  \\
+    Emsizini        & Yes & 4 & Yes  \\
+    Livwezi         & Yes & 4 & Yes  \\
+    Choma           & Yes & 4 & No  \\
+    Luwawa          & Yes & 5 & Yes  \\
+    Matuli          & Yes & 4 & Yes  \\
+    Namiyasi        & Yes & 4 & Yes \\
+    Nsanje          & Yes & 5 & Yes  \\
+    Lemwe           & Yes & 5 & Yes  \\
+    Katewe          & Yes & 4 & No  \\
+    Mteneza         & Yes & 4 & Yes  \\
+    Mndinda         & Yes & 5 & Yes  \\
+    Chikuluma       & Yes & 5 & Yes  \\
+    Mangochi        & Yes & 5 & No  \\
+    
+    \bottomrule
+    \bottomrule
+    \end{tabular}
+\caption[User survey- overall system]{Survey results for questions on the overall system.}
+\end{table}
+
+
+% Page without title but section title:
+\newpage
+\section*{\large{B2a - Load abbreviations}}
+\vspace*{1cm}
+
+\begin{table}[ht!]
+\centering
+    \begin{tabular}{ m{7cm} | m{1.5cm}} 
+    \toprule
+    \toprule
+    \textbf{Name} & \textbf{Abbreviation} \\
+    \midrule
+    Light (Purpose)& P1  \\
+    Device charging (Purpose)   &  P2  \\
+    Medical equipment & P3  \\
+    Sterilizer   &  P4  \\
+    Refrigerators & P5  \\
+    Computers  & P6  \\
+    \hline
+    Light (Staff) & S1  \\
+    Device charging (Staff) &  S2  \\
+    Entertainment devices   & S3  \\
+    Refrigerators   & S4 \\
+    Appliances   & S5 \\
+    \hline
+    Water pump  & W1  \\
+    Water heater & W2  \\
+    \bottomrule
+    \bottomrule
+    \end{tabular}
+\caption[User survey- load Abbreviations]{Abbreviations used in the load table.}
+\label{tab:load_abbreviations}
+\end{table}
+
+
+
+\newpage
+\section*{\large{B2b - Connected loads}}
+\vspace*{1cm}
+
+\begin{table}[ht!]
+\centering
+    \begin{tabular}{m{3.5cm}| m{.5cm} m{.5cm} m{.5cm} m{.5cm}m{.5cm} m{.5cm} m{.5cm} m{.5cm}m{.5cm} m{.5cm} m{.5cm}m{.6cm}m{.6cm} |} 
+    \toprule
+    \toprule
+    \textbf{Name}&\textbf{P1}&\textbf{P2}&\textbf{P3}& \textbf{P4}&\textbf{P5} &\textbf{P6}& 
+    \textbf{S1}&\textbf{S2}&\textbf{S3}&\textbf{S4}&\textbf{S4}&
+    \textbf{W1}&\textbf{W2}\\
+    \midrule
+    Chiwoza         & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+    \hline
+    Chimwamkango    & 1 & 1 & 0 & 0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 0 & 0\\
+    \hline
+    Mitondo         & 1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+    \hline
+    Chinyama        & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1 & 1 & 0 & 0\\
+    \hline
+    Emsizini        & 0 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0\\
+    \hline
+    Livwezi         & 1 & 1 & 1 & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 0 & 1 & 1\\
+    \hline
+    Choma           & 1 & 1 & 0 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 0 & 0\\
+    \hline
+    Luwawa          & 1 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 &  0 & 0\\
+    \hline
+    Matuli          & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0\\
+    \hline
+    Namiyasi        & 1 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0\\
+    \hline
+    Nsanje          & 1 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+    \hline
+    Lemwe           & 1 & 1 & 0 & 0 & 1 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1\\
+    \hline
+    Katewe          & 1 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+    \hline
+    Mteneza         & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 1 & 1 & 1\\
+    \hline
+    Mndinda         & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0\\
+    \hline
+    Chikuluma       & 1 & 0 & 0 & 0 & 1 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 0\\
+    \hline
+    Mangochi        & 1 & 1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 1\\
+    
+    \bottomrule
+    \bottomrule
+    \end{tabular}
+\caption[User survey- Connected loads]{Connected loads reported through the user survey. Using the abbreviations in \ref{tab:load_abbreviations}}
+\label{tab:connected_loads}
+\end{table}
+
+\newpage
+\section*{\large{B3 - Load prioritization Day}}
+\vspace*{1cm}
+
+\textbf{Q}: Amongst the loads, how would you prioritize them during daytime?\\
+
+\begin{table}[ht!]
+\centering
+    \begin{tabular}{ m{4cm} m{1.5cm} m{1.5cm} m{1.5cm} m{1.5cm}} 
+    \toprule
+    \toprule
+    \textbf{Load} & \textbf{1st} & \textbf{2nd} & \textbf{3rd} & \textbf{4th}\\
+    \midrule
+    Chiwoza         & P5 & P3 & W1 & P4 \\
+    Chimwamkango    & P5 & P2 & S2 & S1 \\
+    Mitondo         & P4 & P5 & S5 & P2 \\
+    Chinyama        & P1 & P2 & S1 & - \\
+    Emsizini        & P5 & P6 & S5 & S1 \\
+    Livwezi         & W1 & P5 & P4 & S2 \\
+    Choma           & P1 & P5 & S1 & P2 \\
+    Luwawa          & P4 & S2 & S5 & P6 \\
+    Matuli          & P5 & P4 & S5 & P2 \\
+    Namiyasi        & P5 & P4 & S1 & P2 \\
+    Nsanje          & P3 & P5 & P6 & S2 \\
+    Lemwe           & P5 & S2 & W2 & P2 \\
+    Katewe          & P6 & P2 & W2 & - \\
+    Mteneza         & W1 & S2 & P2 & P3 \\
+    Mndinda         & P4 & P3 & P6 & S2 \\
+    Chikuluma       & P5 & P2 & -  & - \\
+    Mangochi        & P3 & P2 & P4 & - \\
+    
+    \bottomrule
+    \bottomrule
+    \end{tabular}
+\caption[User survey- Load prioritization daytime]{Survey results for load prioritization during daytime.}
+\end{table}
+
+\newpage
+\section*{\large{B4 - Load prioritization Night}}
+\vspace*{1cm}
+
+\textbf{Q}: Amongst the loads, how would you prioritize them during nighttime?\\
+
+\begin{table}[ht!]
+\centering
+    \begin{tabular}{ m{4cm} m{1.5cm} m{1.5cm} m{1.5cm} m{1.5cm}} 
+    \toprule
+    \toprule
+    \textbf{Load} & \textbf{1st} & \textbf{2nd} & \textbf{3rd} & \textbf{4th}\\
+    \midrule
+    Chiwoza         & P1 & P3 & P4 & P2 \\
+    Chimwamkango    & P1 & P2 & S1 & S2 \\
+    Mitondo         & P1 & P5 & S2 & P2 \\
+    Chinyama        & S1 & P2 & S5 & S3 \\
+    Emsizini        & P1 & P5 & P2 & P2 \\
+    Livwezi         & P1 & P3 & P5 & S1 \\
+    Choma           & P1 & S1 & P5 & S2 \\
+    Luwawa          & P1 & P5 & S1 & P2 \\
+    Matuli          & P1 & S5 & P5 & S1 \\
+    Namiyasi        & P1 & S1 & S3 & P2 \\
+    Nsanje          & P5 & P6 & P3 & - \\
+    Lemwe           & P1 & P5 & W2 & W1 \\
+    Katewe          &  - & -  & -  & - \\
+    Mteneza         & P1 & S3 & S1 & P2 \\
+    Mndinda         & P1 & P5 & P4 & S1 \\
+    Chikuluma       & P5 & P2 & -  & - \\
+    Mangochi        & P1 & P5 & P3 & - \\
+    
+    \bottomrule
+    \bottomrule
+    \end{tabular}
+\caption[User survey- Load prioritization nighttime]{Survey results for load prioritization during nighttime.}
+\end{table}
+
+\newpage
+\section*{\large{B5 - Forced choice}}\label{seq:forced_choice}
+\vspace*{1cm}
+
+\textbf{Q1}: Would you rather have...?\\
+
+\textbf{\textit{A1}}: Staff houses powered during evening, high risk of other high power devices such as water pump, water heater or medical equipment being unable to run during night.\\
+
+\textbf{\textit{B1}}: Staff houses not powered during evening, low risk of other high power devices such as water pump, water heater or medical equipment being unable to run during night.\\
+
+\noindent\textbf{Q2}: Which of these is more acceptable?\\
+
+\textbf{\textit{A2}}: Staff houses powered during evening all \textit{days of the week},  high power devices such as water pump, water heater or medical equipment being unable to run during nighttime \textit{once or twice a week}.\\
+
+\textbf{\textit{B2}}: Staff houses not powered during evening \textit{once or twice a week},  high power devices such as water pump, water heater or medical equipment being able to run during nighttime \textit{all days of the week}.
+
+
+\begin{table}[ht!]
+\centering
+    \begin{tabular}{ m{4cm} m{2.5cm} m{2.5cm}} 
+    \toprule
+    \toprule
+    \textbf{Name} & \textbf{Q1} & \textbf{Q2}\\
+    \midrule
+    Chiwoza         & B1 & B2  \\
+    Chimwamkango    & A1 & A2  \\
+    Mitondo         & B1 & B2  \\
+    Chinyama        & A1 & A2  \\
+    Emsizini        & B1 & B2  \\
+    Livwezi         & B1 & B2  \\
+    Choma           & B1 & B2  \\
+    Luwawa          & B1 & B2  \\
+    Matuli          & B1 & B2  \\
+    Namiyasi        & B1 & B2  \\
+    Nsanje          & B1 & B2  \\
+    Lemwe           & B1 & B2  \\
+    Katewe          & B1 & B2  \\
+    Mteneza         & A1 & A2  \\
+    Mndinda         & B1 & B2  \\
+    Chikuluma       & B1 & B2  \\
+    Mangochi        & B1 & B2  \\
+    
+    \bottomrule
+    \bottomrule
+    \end{tabular}
+\caption[User survey- Forced choice]{Forced choice between loads.}
+\end{table}
+
+\newpage
+\section*{\large{B6 - Control system acceptability}}\label{seq:acceptability}
+\vspace*{1cm}
+
+\textbf{Q1}: If the system was automatically controlled based on the prioritization you have given, would that be acceptable?\\
+
+\noindent\textbf{Q2}: If, given such a control system, you suddenly were not able to run a load you had not prioritized, would you understand why?\\
+
+\begin{table}[ht!]
+\centering
+    \begin{tabular}{ m{4cm} m{2.5cm} m{2.5cm}} 
+    \toprule
+    \toprule
+    \textbf{Name} & \textbf{Q1} & \textbf{Q2}\\
+    \midrule
+    Chiwoza         & YES & YES  \\
+    Chimwamkango    & YES & YES  \\
+    Mitondo         & YES & YES  \\
+    Chinyama        & NO & YES  \\
+    Emsizini        & YES & NO  \\
+    Livwezi         & YES & YES  \\
+    Choma           & NO & YES  \\
+    Luwawa          & YES & YES  \\
+    Matuli          & NO & YES  \\
+    Namiyasi        & YES & YES  \\
+    Nsanje          & NO & YES  \\
+    Lemwe           & NO & NO  \\
+    Katewe          & NO & NO  \\
+    Mteneza         & NO & NO  \\
+    Mndinda         & NO & YES  \\
+    Chikuluma       & NO & NO  \\
+    Mangochi        & YES & YES  \\
+    
+    \bottomrule
+    \bottomrule
+    \end{tabular}
+\caption[User survey- control acceptability and understanding ]{Acceptability and understanding of an eventual control system.}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
