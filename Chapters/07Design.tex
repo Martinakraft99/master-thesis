@@ -1,11 +1,9 @@
 \section{Specification}\label{seq:specification}
-The goal of the thesis is to design, propose and evaluate a new control system for the site of Chiwoza. The goal of this section is to specify the stakeholder and criteria of evaluation for such a control system. 
+The goal of the thesis is to design, propose and evaluate a new control system for the site of Chiwoza. The goal of this section is to specify the stakeholders and criteria of evaluation for such a control system. 
 
 The control system performance is evaluated on a set of key performance indicators (KPIs). The scoring of the control system on these is compared against the current control system. This will form the quantitative basis for the evaluation of the control system.
 
 The KPIs were developed through a thorough process considering all of the stakeholders connected to a system. These stakeholders, listed in table \ref{tab:stakeholders}, have different interests and considerations, this is reflected in the KPIs shown in table \ref{tab:KPI}. 
-
-%Two key concepts of the KPIs is the difference between \textit{demand satisfaction} and \textit{load availability}, and \textit{window of operation}. A demand is satisfied if the load generating the demand is given the required power to run, and the power is consumed. On the other hand, a load can be allocated an amount of power, but not consuming it. This becomes relevant when one wants to save battery power to be able to run certain loads during the night in case of an emergency. 
 
 \begin{table}[h]
     \centering
@@ -13,11 +11,11 @@ The KPIs were developed through a thorough process considering all of the stakeh
         \hline
         \textbf{Stakeholder} & \textbf{Description} & \textbf{Examples} & \textbf{Main interests} \\
         \hline
-        End-user & The final users of the appliances powered by the solar systems & Staff, family of staff, patients etc. & The availability of load on demand \\
+        End-users & The final users of the appliances powered by the solar systems & Staff, family of staff, patients etc. & The availability of load on demand \\
         \hline
         Customer & The contract partner paying for the installation and monitoring of the systems & UNICEF, USAID, NCA, WFP & The impact per investment of the systems \\
         \hline
-        Provider & The contract partner delivering and monitoring the systems & DCP & The lifetime of the components and the parameters agreed upon in the contract \\
+        Provider-company & The contract partner delivering and monitoring the systems & DCP & The lifetime of the components and the parameters agreed upon in the contract \\
         \hline
     \end{tabular}
     \caption[Stakeholders]{Stakeholders and their main interests}
@@ -30,22 +28,22 @@ The KPIs were developed through a thorough process considering all of the stakeh
         \hline
         \#&\textbf{KPI} & \textbf{Description} & \textbf{Motivation} & \textbf{Value} & \textbf{Main Stakeholder} \\
         \hline
-        I&Battery Charge/discharge rate & The rate of charge and discharge amount from/to the battery  & The charge/discharge rate is inversely proportional to the battery life & Should not exceed 0.2C & Provider \\
+        I&Battery Charge/discharge rate & The rate of charge and discharge amount from/to the battery  & The charge/discharge rate is inversely proportional to the battery life & Should not exceed 0.2C & Provider-company \\
         \hline
-        II&Battery SOC & The energy stored in the battery & A high SOC for a prolonged period can damage the battery lifetime  & Should not exceed 90\% SOC & Provider \\
+        II&Battery SOC & The energy stored in the battery & A high SOC for a prolonged period can damage the battery lifetime  & Should not exceed 90\% SOC & Provider-company \\
         \hline
         III&User satisfaction & The ability to satisfy a load demand weighted by the user importance of the load.  & The end-users have placed different importance to the various loads.  & $\mathbf{R}^+$ & End-user  \\
         \hline
         IV&Utilization & The ratio between utilized and potential solar production & The Customer would like to see that the systems they have procured is used  & 0-100\% & Customer \\
         \hline
-        V&Critical Load Reliability & Reliability for critical loads as described in section \ref{sec:reliability}. & To showcase the ability to supply power for the facility's purpose & 0-100\% & Customer \\
+        V&Critical Load Reliability & Reliability for critical loads as described in section \ref{sec:reliability}. & To showcase the ability to supply power for the site's purpose & 0-100\% & Customer \\
         \hline
     \end{tabular}
-    \caption[KPIs]{KPIs}
+    \caption[KPIs]{KPIs developed to quantitatively evaluate the system. The value column for I and II includes values the system should avoid, while for III-IV the column includes the range of values the KPI could take. }
     \label{tab:KPI}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[h]
     \centering
     \begin{tabular}{|c|p{12cm}|}
         \hline
@@ -57,7 +55,7 @@ The KPIs were developed through a thorough process considering all of the stakeh
         \hline
         3 & \textbf{Adjustable to changing goal prioritization} - The system must be able to adjust to different prioritizations of goals. The ability to do so should be visible in the results. \\
         \hline
-        4 & \textbf{Adaptive to changing conditions} - Conditions such as production and consumption might change a lot during the system operation. Sometimes there will be no forecast warning of this. The control system should then quickly react and adapt. \\
+        4 & \textbf{Adaptive to changing conditions} - Conditions such as production and demand might change a lot during the system operation. Sometimes there will be no forecast warning of this. The control system should then quickly react and adapt. \\
         \hline
         5 & \textbf{Be applicable across multiple sites} - As DCP runs several sites, the control system cannot be only tailored to an individual site but needs to be modifiable to serve several similar ones. \\
         \hline
@@ -66,26 +64,18 @@ The KPIs were developed through a thorough process considering all of the stakeh
     \label{tab:control_system_specification}
 \end{table}
 
-The designed control system should also satisfy the set of specifications listed in table \ref{tab:control_system_specification}. These does not assert the control system performance but offer a basis to qualitatively evaluate the proposed system.\\
+The designed control system should also satisfy the set of specifications listed in table \ref{tab:control_system_specification}. These do not assert the control system performance but offer a basis to qualitatively evaluate the proposed system.\\
 
-%\begin{enumerate}
-%    \item \textbf{Make use of historic data}    -   As DCP is gathering data from all sites, the control system should use the historic data to guide future behaviour. The current control system use no historical data, a new control system that performs worse than the current is therefore to be deemed unsuccessful.
- %   \item \textbf{Continuously control while receiving data sporadically}   -   The data is gathered at a slower pace than the inherent dynamics of the system. The control system must be able to handle this.
-  %  \item \textbf{Adjustable to changing goal prioritization}   -   The system must be able to adjust to different prioritizations of goals. The ability to do so should be visible in the results.
-   % \item \textbf{Adaptive to changing conditions}   -   Conditions such as production and consumption might change a lot during the system operation. Sometimes there will be no forecast warning of this. The control system should then quickly react and adapt.
-    %\item \textbf{Be applicable across multiple sites}  -   As DCP runs several sites, the control system cannot be only tailored to an individual site but needs to be modifiable to serve several similar ones. 
-%\end{enumerate}
-
-To suit the specifications, a control system with the components as shown in figure \ref{fig:control_syst} should be constructed. The individual role of the components is:
+To suit the specifications, a control system with the components as shown in figure \ref{fig:control_syst} should be constructed. The individual roles of the components are:
 \begin{itemize}
-    \item \textit{Forecaster}   -   Make use of historical data and measurements to provide a load and production forecast to the optimizer. Must be able to update its forecasts based upon new measurements.
+    \item \textit{Forecaster}   -   Make use of historical data and measurements to provide a load and production forecast to the optimizer. Must be able to update its forecasts based on new measurements.
     \item \textit{Optimizer}    -   Make use of the forecast data to provide an optimal plan to the controller.
     \item \textit{Controller}   -   Using the plan from the optimizer, allow or disallow the running of loads and provide charge to the battery.
 \end{itemize}
 
 The design of these components will be detailed in the subsequent sub-chapters while the implementation in a simulated environment is found in the following chapter.
 
-\begin{figure}
+\begin{figure}[!h]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/control_overview.jpg}
     \caption[Control system components]{Control system components}
@@ -95,20 +85,20 @@ The design of these components will be detailed in the subsequent sub-chapters w
 
 \section{Load analysis}
 
-Chiwoza is, as shown in figure \ref{fig:system_topology}, solely powered a hybrid source consisting of a battery and PV-module. As solar power is an intermittent and \textit{non-dispatchable} resource, the only control levers are the power to and from the battery and the enabling/disabling of loads. To control a system by adjusting the load is known as \textit{demand-side-management}(DSM). For a DSM-control system to be effective, a thorough and accurate understanding of the connected loads is necessary. This is gained through load analysis. There are 3 main goals to be achieved from this process:
+Chiwoza is, as shown in figure \ref{fig:system_topology}, solely powered by a hybrid source consisting of a battery and PV-module. As solar power is an intermittent and \textit{non-dispatchable} resource, the only control levers are the power to and from the battery and the enabling/disabling of loads. To control a system by adjusting the load is known as \textit{demand-side-management}(DSM). For a DSM-control system to be effective, a thorough and accurate understanding of the connected loads is necessary. This is gained through load analysis. There are 3 main goals to be achieved from this process:
 \begin{enumerate}
-    \item \textbf{Understand consumption pattern}    - The total demand varies both in how much power is demanded, and when it is demanded. This is also true on the disaggregated level for the consumption for each load. This creates a consumption pattern across time. When attempting to control the consumption, the goal is to predict the pattern into the future. This will is the subject of the next section \ref{seq:load_forecasting} on load forecasting. A prerequisite for the work in that section is an understanding of the historical consumption pattern.
-    \item \textbf{Understand load value}    -   As loads vary in their purpose, the end users will value the available loads differently. This valuation is unlikely to be static but will vary based on circumstances such as the time of day. The control system will prioritize certain loads over other. This prioritization should be partly based on how the end-users value the loads present at the site. The information about valuation is gained through a user survey described in section \ref{seq:user_survey}.
-    \item \textbf{Classifying types of loads}   -   Loads also differ in other aspects, such as the flexibility of demand. Certain loads need to satisfy an immediate goal, while others are more flexible in when demand can be met. Understanding this difference between the loads are fundamental for identifying the available control options. This work is done in section \ref{seq:load_classification}.
+    \item \textbf{Understand consumption pattern}    - The total consumption varies both in how much power is demanded, and when it is demanded. This is also true on the disaggregated level for the consumption for each load. This creates a consumption pattern across time. When attempting to control the consumption, the goal is to predict the pattern into the future. This will is the subject of the next section \ref{seq:load_forecasting} on load forecasting. A prerequisite for the work in that section is an understanding of the historical consumption pattern.
+    \item \textbf{Understand load value}    -   As loads vary in their purpose, the end users will value the available loads differently. This valuation is unlikely to be static but will vary based on circumstances such as the time of day. The control system will prioritize certain loads over others. This prioritization should be partly based on how the end-users value the loads present at the site. The information about valuation is gained through a user survey described in section \ref{seq:user_survey}.
+    \item \textbf{Classifying types of loads}   -   Loads also differ in other aspects, such as the flexibility of demand. Certain loads need to satisfy an immediate goal, while others are more flexible in when demand can be met. Understanding this difference between the loads is fundamental for identifying the available control options. This work is done in section \ref{seq:load_classification}.
 \end{enumerate}
 
 For this thesis, the load analysis was performed through the gathering of transmitted data and user queries. The available data from the monitoring system detailed in subsection \ref{seq:data_collection}. The most important being the time-series showing the disaggregated-by-meter and total consumption.\\
 
 \subsection{Statistical analysis}
 
-The statistical load analysis attempts to draw conclusion based on historic data. Starting out by considering the total daily consumption, plotted from October 23rd to December 23rd 2023 in \ref{fig:tot_con_daily_chiwoza_20231023-1223}  seems to vary around a mean. At the the 20th of December, there seems to be a significant drop in consumption. This could be reflect an actual lower consumption, a problem with the data or a failure of the system.\\ 
+The statistical load analysis attempts to draw conclusion based on historic data. Starting out by considering the total daily consumption, plotted from October 23rd to December 23rd 2023 in figure \ref{fig:tot_con_daily_chiwoza_20231023-1223}  seems to vary around a mean. At the the 20th of December, there seems to be a significant drop in consumption. This could reflect an actual lower consumption, a problem with the data or a failure of the system.\\ 
 
-It is also possible to examine consumption at a higher time-resolution, down to the hourly level. Figure \ref{fig:tot_con48_chiwoza_202310} shows the consumption in October 2023 plotted as successive 48 hour periods. Each gray line represent a 48 hour period. These are mostly centered around the average, shown in blue. It is clear that for total consumption, the variance within a day is much larger than the variance between days. There are certain spikes indicating a sudden large, but short-lasting consumption during the daytime. The section \ref{seq:current_syst} on current control measures states that certain high power loads are set to run only at specific time intervals during the day. This pattern is likely a cause of that.\\
+It is also possible to examine consumption at a higher time-resolution, down to the hourly level. Figure \ref{fig:tot_con48_chiwoza_202310} shows the consumption in October 2023 plotted as successive 48-hour periods. Each gray line represents a 48-hour period. These are mostly centred around the average, shown in blue. It is clear that for total consumption, the variance within a day is much larger than the variance between days. There are certain spikes indicating a sudden large, but short-lasting consumption during the daytime. The section \ref{seq:current_syst} on current control measures states that certain high power loads are set to run only at specific time intervals during the day. This pattern is likely a cause of that.\\
 
 \begin{figure}
     \centering
@@ -124,83 +114,83 @@ It is also possible to examine consumption at a higher time-resolution, down to 
     \label{fig:tot_con48_chiwoza_202310}
 \end{figure}
 
-The total consumption of a site may be split into the consumption measured by the meters mounted at the various circuits. This yields an disaggregated view of the consumption based on the specific usage. As outlined in section \ref{seq:data_collection}, this is the highest level of resolution of which to analyse historical consumption data on. In figure \ref{fig:con_disagg_chiwoza_20230603-05} the consumption of Chiwoza over a 48 hour period in June 2023 is disaggregated based on meter. This plot supports the proposal in the previous paragraph, that the spikes in consumption was caused by time controlled high-powered loads. The fact that these loads are already controlled, suggest that these are flexible. This means that their past pattern is less interesting, because the pattern can be adjusted as need be. For the other loads, the pattern is important as it is inflexible. Neglecting the flexible loads, the consumption seems to be dominated by the Medical Light and Staff Socket consumption. For the Medical Light not surprisingly there is a increase in consumption during nighttime. This creates a repeating pattern each day. Repeating patterns over a period is known as periodicity, which is a key characteristic to identify for a load. We can be confident that most loads will have periodicity within a day. In addition, some loads might exhibit patterns between days. Identifying these will greatly improve the foundation for forecasting.\\ 
+The total consumption of a site may be split into the consumption measured by the meters mounted at the various circuits. This yields a disaggregated view of the consumption based on the specific usage. As outlined in section \ref{seq:data_collection}, this is the highest level of resolution on which to analyse historical consumption data. In figure \ref{fig:con_disagg_chiwoza_20230603-05} the consumption of Chiwoza over a 48 hour period in June 2023 is disaggregated based on meter. This plot supports the proposal in the previous paragraph, that the spikes in consumption were caused by time controlled high-powered loads. The fact that these loads are already controlled, suggests that these are flexible. This means that their past pattern is less interesting, because the pattern can be adjusted as need be. For the other loads, the pattern is important as it is inflexible. Neglecting the flexible loads, the consumption seems to be dominated by the Medical Light and Staff Socket consumption. For the Medical Light not surprisingly there is an increase in consumption during nighttime. This creates a repeating pattern each day. Repeating patterns over a period is known as periodicity, which is a key characteristic to identify for a load. We can be confident that most loads will have periodicity within a day. In addition, some loads might exhibit patterns between days. Identifying these will greatly improve the foundation for forecasting.\\ 
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/con_disagg_chiwoza_20230603-05.png}
-    \caption[Disaggregated Consumption Chiwoza 20230603-05]{The disaggregated consumption of Chiwoza over a 48 hour period starting from midnight 2023-06-03. As opposed to the rest of the thesis, the date was selected so far back because afterwards a communication problem with meter on the water heater occurred. In later analysis, loads such as Staff Sockets 1 and 2 have recorded no consumption. }
+    \caption[Disaggregated Consumption Chiwoza 20230603-05]{The disaggregated consumption of Chiwoza over a 48 hour period starting from midnight 2023-06-03. As opposed to the rest of the thesis, the date was selected so far back because afterwards a communication problem with the meter on the water heater occurred. In later analysis, loads such as Staff Sockets 1 and 2 have recorded no consumption. }
     \label{fig:con_disagg_chiwoza_20230603-05}
 \end{figure}
 
 \subsubsection{Patterns between days}\label{seq:periodicity}
 
-A natural first assumption is that some loads will show a difference consumption between workdays and weekends. Despite being a health facility, where medical emergencies might suddenly require attention, Chiwoza follows a regular Malawian workweek from Monday to Friday. Looking first at the total consumption, the weekends are shaded grey in figure \ref{fig:tot_con_daily_chiwoza_20231023-1223} showing the total consumption. From the plot alone, there are no clear difference between weekdays and weekends for the total consumption. The ACF can also be used to indicate a pattern. If the consumption was largely different between weekdays and weekends, this would have shown up in the ACF as high values at lags corresponding to the current day of week. The ACF across the entire period, shown in \ref{fig:con_acf_day_chiwoza_201023-1223}, shows no such pattern. There are no public holidays in Malawi during this period either, so that is no factor. The analysis does therefore not show enough to support a claim that the day of week influences the total consumption significantly. However, there might be such a pattern for certain loads. \\
+A natural first assumption is that some loads will show a difference in consumption between workdays and weekends. Despite being a health site, where medical emergencies might suddenly require attention, Chiwoza follows a regular Malawian workweek from Monday to Friday. Looking first at the total consumption, the weekends are shaded grey in figure \ref{fig:tot_con_daily_chiwoza_20231023-1223} showing the total consumption. From the plot alone, there is no clear difference between weekdays and weekends for the total consumption. The ACF can also be used to indicate a pattern. If the consumption was largely different between weekdays and weekends, this would have shown up in the ACF as high values at lags corresponding to the current day of the week. The ACF across the entire period, shown in \ref{fig:con_acf_day_chiwoza_201023-1223}, shows no such pattern. There are no public holidays in Malawi during this period either, so that is no factor. The analysis does therefore not show enough to support a claim that the day of the week influences the total consumption significantly. However, there might be such a pattern for certain loads. \\
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/con_acf_day_chiwoza_201023-1223.png}
-    \caption[ACF Daily consumption Chiwoza 20231023-1223]{ACF of the total daily consumption at Chiwoza. Lags represents the amount of days back from the December 23rd 2023.}
+    \caption[ACF Daily consumption Chiwoza 20231023-1223]{ACF of the total daily consumption at Chiwoza. Lags represent the amount of days back from December 23rd 2023.}
     \label{fig:con_acf_day_chiwoza_201023-1223}
 \end{figure}
 
-The same kind of analysis as performed above can be done on individual loads. The medical light consumption, shown in figure \ref{fig:con_chiwoza_med_light_20231023-1223} have no clear pattern between days. Neither does staff consumption, as seen in figure \ref{fig:con_chiwoza_staff_20231023-1223}. The two loads Medical Sockets and Guardian Shelter Socket, shown in \autoref{fig:con_chiwoza_med_socket_20231023-1223} and \autoref{fig:con_chiwoza_guard_socket_20231023-1223} respectively does however indicate some difference in consumption between weekdays and weekends. The pattern at the Guardian Shelter Socket especially, shows a clear difference, with its consumption happening almost exclusively at weekdays. The ACF across the period for the Guardian shelter supports this as, shown in figure \ref{fig:con_acf_chiwoza_guard_socket_20231023-1223}, the lag representing a 7 days back from December 23rd, a Saturday, is significant. The ACF for the consumption from the Medical Socket, in figure \ref{fig:con_acf_chiwoza_med_socket_20231023-1223} is less clear, with no significant daily lags. This indicates that the difference in consumption between weekdays and weekends are larger for the Sockets at the Guardian Shelter then for the Medical Building. There are also not the same pattern for the light consumption at the guardian shelter, seen in \ref{fig:con_ts_chiwoza_guard_light_202311}, suggesting that the lights are on independently of the day of week. The last load, the fence light shown in figure \ref{fig:con_chiwoza_fence_light_20231023-1223}, have no clear pattern either. The consumption here is also so small, averaging to less than 25Wh a day, so that small deviations have a large effect. \\
+The same kind of analysis as performed above can be done on individual loads. The medical light consumption, shown in figure \ref{fig:con_chiwoza_med_light_20231023-1223} has no clear pattern between days. Neither does staff consumption, as seen in figure \ref{fig:con_chiwoza_staff_20231023-1223}. The two loads Medical Sockets and Guardian Shelter Socket, shown in \autoref{fig:con_chiwoza_med_socket_20231023-1223} and \autoref{fig:con_chiwoza_guard_socket_20231023-1223} respectively does however indicate some difference in consumption between weekdays and weekends. The pattern at the Guardian Shelter Socket especially, shows a clear difference, with its consumption happening almost exclusively on weekdays. The ACF across the period for the Guardian shelter supports this as, shown in figure \ref{fig:con_acf_chiwoza_guard_socket_20231023-1223}, the lag representing 7 days back from December 23rd, a Saturday, is significant. The ACF for the consumption from the Medical Socket, in figure \ref{fig:con_acf_chiwoza_med_socket_20231023-1223} is less clear, with no significant daily lags. This indicates that the difference in consumption between weekdays and weekends is larger for the Sockets at the Guardian Shelter than for the Medical Building. There is also not the same pattern for the light consumption at the guardian shelter, seen in \ref{fig:con_ts_chiwoza_guard_light_202311}, suggesting that the lights are on independently of the day of the week. The last load, the fence light shown in figure \ref{fig:con_chiwoza_fence_light_20231023-1223}, have no clear pattern either. The consumption here is also so small, averaging to less than 25Wh a day, so small deviations have a large effect. \\
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/con_chiwoza_med_light_20231023-1223.png}
-    \caption[Medical Light consumption Chiwoza 20231023-1223]{Light consumption in the medical buildings at Chiwoza from October 23rd to December 23rd 2023. 5 day average as dotted line. Weekends shaded in grey.}
+    \caption[Medical Light consumption Chiwoza 20231023-1223]{Light consumption in the medical buildings at Chiwoza from October 23rd to December 23rd 2023. 5-day average as a dotted line. Weekends are shaded in grey.}
     \label{fig:con_chiwoza_med_light_20231023-1223}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/con_chiwoza_med_socket_20231023-1223.png}
-    \caption[Medical Socket consumption Chiwoza 20231023-1223]{Consumption from the sockets at the medical building at Chiwoza from October 23rd to December 23rd 2023. 5 day average as dotted line. Weekends shaded in grey.}
+    \caption[Medical Socket consumption Chiwoza 20231023-1223]{Consumption from the sockets at the medical building at Chiwoza from October 23rd to December 23rd 2023. 5-day average as a dotted line. Weekends are shaded in grey.}
     \label{fig:con_chiwoza_med_socket_20231023-1223}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/con_chiwoza_guard_socket_20231023-1223.png}
-    \caption[Guardina Shelter Socket consumption Chiwoza 20231023-1223]{Consumption from the sockets at the Guardian Shelter at Chiwoza from October 23rd to December 23rd 2023. 5 day average as dotted line. Weekends shaded in grey.}
+    \caption[Guardina Shelter Socket consumption Chiwoza 20231023-1223]{Consumption from the sockets at the Guardian Shelter at Chiwoza from October 23rd to December 23rd 2023. 5-day average as a dotted line. Weekends are shaded in grey.}
     \label{fig:con_chiwoza_guard_socket_20231023-1223}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/con_chiwoza_guard_light_20231023-1223.png}
-    \caption[Guardian Shelter Light consumption Chiwoza 20231023-1223]{Consumption from the Lights at the Guardian Shelter at Chiwoza from October 23rd to December 23rd 2023. 5 day average as dotted line. Weekends shaded in grey.}
+    \caption[Guardian Shelter Light consumption Chiwoza 20231023-1223]{Consumption from the Lights at the Guardian Shelter at Chiwoza from October 23rd to December 23rd 2023. 5-day average as a dotted line. Weekends are shaded in grey.}
     \label{fig:con_chiwoza_guard_light_20231023-1223}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
 \centering
 \includegraphics[width=\textwidth]{Figures/06Design/con_acf_chiwoza_guard_socket_20231023-1223.png}
-\caption[ACF Guardian shelter socket consumption Chiwoza 20231023-1223]{Auto correlation of consumption measured from the sockets at the Guardian Shelter at Chiwoza between October 23rd to December 23rd 2023. Blue dotted lines represent 95\% confidence interval.}
+\caption[ACF Guardian shelter socket consumption Chiwoza 20231023-1223]{Auto correlation of consumption measured from the sockets at the Guardian Shelter at Chiwoza between October 23rd to December 23rd 2023. Blue dotted lines represent a 95\% confidence interval.}
 \label{fig:con_acf_chiwoza_guard_socket_20231023-1223}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
 \centering
 \includegraphics[width=\textwidth]{Figures/06Design/con_acf_chiwoza_med_socket_20231023-1223.png}
-\caption[ACF Medical Socket consumption Chiwoza 20231023-1223]{Auto correlation of consumption measured from the sockets at the Medical Building at Chiwoza between October 23rd to December 23rd 2023. Blue dotted lines represent 95\% confidence interval.}
+\caption[ACF Medical Socket consumption Chiwoza 20231023-1223]{Auto correlation of consumption measured from the sockets at the Medical Building at Chiwoza between October 23rd to December 23rd 2023. Blue dotted lines represent a 95\% confidence interval.}
 \label{fig:con_acf_chiwoza_med_socket_20231023-1223}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/con_chiwoza_fence_light_20231023-1223.png}
-    \caption[Fence Light consumption Chiwoza 20231023-1223]{Fence light consumption at Chiwoza from October 23rd to December 23rd 2023. 5 day average as dotted line. Weekends shaded in grey.}
+    \caption[Fence Light consumption Chiwoza 20231023-1223]{Fence light consumption at Chiwoza from October 23rd to December 23rd 2023. 5-day average as a dotted line. Weekends are shaded in grey.}
     \label{fig:con_chiwoza_fence_light_20231023-1223}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
   \centering
   \begin{minipage}{0.7\textwidth} % Adjust the width as needed
     \centering
     \includegraphics[width=\linewidth]{Figures/06Design/con_chiwoza_staff_light_20231023-1223.png}
-    \caption[Staff Light consumption Chiwoza 20231023-1223]{Daily light consumption in the staff buildings at Chiwoza between October 23rd to December 23rd 2023. Weekends shaded in grey.}
+    \caption[Staff Light consumption Chiwoza 20231023-1223]{Daily light consumption in the staff buildings at Chiwoza between October 23rd to December 23rd 2023. Weekends are shaded in grey.}
     \label{fig:con_chiwoza_staff_light_20231023-1223}
   \end{minipage}
 
@@ -209,7 +199,7 @@ The same kind of analysis as performed above can be done on individual loads. Th
   \begin{minipage}{0.7\textwidth} % Adjust the width as needed
     \centering
     \includegraphics[width=\linewidth]{Figures/06Design/con_chiwoza_staff_socket_20231023-1223.png}
-    \caption[Staff Socket consumption Chiwoza 20231023-1223]{Daily consumption measured from the sockets at the staff buildings at Chiwoza between October 23rd to December 23rd 2023. Weekends shaded in grey.}
+    \caption[Staff Socket consumption Chiwoza 20231023-1223]{Daily consumption measured from the sockets at the staff buildings at Chiwoza between October 23rd to December 23rd 2023. Weekends are shaded in grey.}
     \label{fig:con_chiwoza_staff_socket_20231023-1223}
   \end{minipage}
 
@@ -217,11 +207,10 @@ The same kind of analysis as performed above can be done on individual loads. Th
   \label{fig:con_chiwoza_staff_20231023-1223}
 \end{figure}
 
-In summary, the load analysis have identified that apart from the flexible loads, the consumption is dominated by staff and medical usage. These have a clear periodic pattern within a day, but for most of them, no obvious between days. The two exceptions, The Medical Sockets and especially the Guardian Shelter Socket, have a clear enough difference in consumption between the weekdays and weekends to warrant a extra consideration for the forecasting.
-
+In summary, the load analysis has identified that apart from the flexible loads, the consumption is dominated by staff and medical usage. These have a clear periodic pattern within a day, but for most of them, no obvious between days. The two exceptions, The Medical Sockets and especially the Guardian Shelter Socket, have a clear enough difference in consumption between the weekdays and weekends to warrant extra consideration for the forecasting.
 
 \subsection{User survey}\label{seq:user_survey}
-A user survey was developed for this thesis in collaboration with DCP. It was performed through phone calls by a local representative to staff members to staff members at the site. A total of 19 sites participated in the survey, all listed in \ref{tab:us_participants}. These vary in size, purpose and location. The goal of the survey was:\todo{check break}
+A user survey was developed for this thesis in collaboration with DCP. It was performed through phone calls by a local representative to staff members to staff members at the site. A total of 19 sites participated in the survey, all listed in \ref{tab:us_participants}. These vary in size, purpose and location. The goal of the survey was:
 \begin{itemize}
     \item \textit{Map out connected loads}  - Finding which loads are connected to the various sites.
     \item \textit{Discover load prioritization} - Examining how the users value and use the different loads at various times during the day.
@@ -230,9 +219,9 @@ A user survey was developed for this thesis in collaboration with DCP. It was pe
 
 In this section, the results relating to loads are discussed. The full results from the questionnaire are included in appendix \ref{appendix:user_survey}. \\
 
-Table \ref{tab:connected_loads} shows the loads reported to be currently connected at the queried sites. When asked to prioritize amongst loads during daytime and nighttime, figure \ref{fig:user_survey_load_daytime_1st&2nd_priority} and \ref{fig:user_survey_load_nighttime_1st&2nd_priority} shows a clear pattern. The users appears on average to value loads related to the purpose of the facility higher than loads related to the leisure of the staff members. This pattern is stronger during the daytime, but even during the night, the first priority is clearly to keep the lights on at the facilities. This is supported by the results in section \ref{seq:forced_choice}, where most respondents answer that they are willing to forgo some days of staff consumption to ensure the availability of facility loads.
+Table \ref{tab:connected_loads} shows the loads reported to be currently connected at the queried sites. When asked to prioritize amongst loads during daytime and nighttime, figure \ref{fig:user_survey_load_daytime_1st&2nd_priority} and \ref{fig:user_survey_load_nighttime_1st&2nd_priority} shows a clear pattern. The users appear on average to value loads related to the purpose of the site higher than loads related to the leisure of the staff members. This pattern is stronger during the daytime, but even during the night, the first priority is clearly to keep the lights on at the facilities. This is supported by the results in section \ref{seq:forced_choice}, where most respondents answer that they are willing to forgo some days of staff consumption to ensure the availability of critical loads.
 
-\begin{figure}[!h]
+\begin{figure}[]
   \centering
 
   % First Subfigure
@@ -259,7 +248,7 @@ Table \ref{tab:connected_loads} shows the loads reported to be currently connect
 \end{figure}
 
 
-\begin{figure}[!h]
+\begin{figure}[]
   \centering
 
   % First Subfigure
@@ -288,14 +277,14 @@ Table \ref{tab:connected_loads} shows the loads reported to be currently connect
 
 
 \subsection{Load classification}\label{seq:load_classification}
-As seen in the previous section, there are several different kinds of loads installed at the various sites. These vary in their importance for the operation at the site, their electrical characteristics and the characteristics important for controlling the system. Using the classification from \cite{Philipo2022-rx}, the classifying control characteristics are \todo{check break}
+As seen in the previous section, there are several different kinds of loads installed at the various sites. These vary in their importance for the operation at the site, their electrical characteristics and the characteristics important for controlling the system. Using the classification from \cite{Philipo2022-rx}, the classifying control characteristics are 
 \begin{itemize}
-    \item \textit{Deferable} -   The ability to defer a load to a different time without a penalty. This is only possible if a demand does not need to be instantaneously met. For instance, if the demand for light, TV or Microscope is not met immediately when demanded, it is noticed by the user. Other loads, such as the water pump, does not have this requirement. Although the demand for water is non-deferable, the pump itself supplies water to a tank, hence as long as the tank has water there is no penalty for deferring the running of the water pump. 
+    \item \textit{Deferable} -   The ability to defer a load to a different time without a penalty. This is only possible if a demand does not need to be instantaneously met. For instance, if the demand for light, TV or Microscope is not met immediately when demanded, it is noticed by the user. Other loads, such as the water pump, do not have this requirement. Although the demand for water is non-deferable, the pump itself supplies water to a tank, hence as long as the tank has water there is no penalty for deferring the running of the water pump. 
     \item \textit{Dimable}  -   A dimable load can run on various power levels
-    \item \textit{Interuptable} -   A interuptable load can be interrupted after being started without any additional penalty. 
+    \item \textit{Interuptable} -   An interruptable load can be interrupted after being started without any additional penalty. 
 \end{itemize}
 
-In addition to these, loads are also assigned a priority, which translates into a penalty for not being allowed to run when demanded. As seen from the user survey, the end-users value different loads higher at different times. The priority is therefore not static, but may change during the day. The various loads found to be connected during the user survey is classified in table \ref{tab:load_control} \\
+In addition to these, loads are also assigned a priority, which translates into a penalty for not being allowed to run when demanded. As seen from the user survey, the end-users value different loads higher at different times. The priority is therefore not static, but may change during the day. The various loads found to be connected during the user survey are classified in table \ref{tab:load_control} \\
 
 \begin{table}[]
     \centering
@@ -355,14 +344,14 @@ As mentioned in section \ref{seq:data_collection}, loads are not measured indivi
 \subsubsection{Flexible Loads definition and analysis}\label{seq:flex_loads}
 From a control perspective, the last 4 loads of table \ref{tab:circuit_control} are the most interesting. Because their demand is flexible, they offer the prime control option to be utilized. These \textit{flexible loads} are characterized by the following:
 \begin{itemize}
-    \item \textit{Energy Demand}    -   Within a day, these loads demands to be ran enough to perform some task. For the water pump, this will be to fill the tank with enough water to satisfy a days consumption, if the tank is large enough to support that. For the water heater, this will be to heat enough water to last X hours in the future. The key is that the energy demand does not have to be satisfied immediately, but within some time window.
-    \item \textit{Power Demand}     -   If the flexible load is running, it is required a certain amount of power to be able to run. This is the power demand. 
+    \item \textit{Energy Demand}    -   Within a day, these loads demand to be run enough to perform some task. For the water pump, this will be to fill the tank with enough water to satisfy a day's demand, if the tank is large enough to support that. For the water heater, this will be to heat enough water to last some hours in the future. The key is that the energy demand does not have to be satisfied immediately, but within some time window.
+    \item \textit{Power Demand}     -   If the flexible load is running, it requires a certain amount of power to be able to run. This is the power demand. 
     \item \textit{Operation Window} -   The operation window specifies within which time window a flexible load can run. For instance, the solar Maize mill should be running during the day, because that is when the farmers can deliver and collect their goods.   
 \end{itemize}
 
-As these loads are more clearly defined, the values can be found from datasheets\cite{wp_documentation}\cite{water_heater}\cite{maize_mill}. The water pump at Chiwoza is a \textit{SQF5-70} from Grundfos. These are powered by  a \textit{universal motor}. A universal motor can be controlled by regulating the current supplied to the motor. Figure \ref{fig:wp_power_flow_curve} from the datasheet provided by the manufacturer relates the power to water depth and flow. Similarly, the figures for the power rating for the other flexible loads are found in the datasheets and included in \ref{tab:flexible_loads_characteristics}. The daily energy demand for the water pump and heater is determined as the average historical daily demand. For the two loads that have not been connected, the maize mill and rental batteries, their daily demand is determined through internal economic calculations by DCP on how often they need to run to be economically feasible for DCP to install at the sites.\\
+As these loads are more clearly defined, the values can be found from datasheets\cite{wp_documentation}\cite{water_heater}\cite{maize_mill}. The water pump at Chiwoza is a \textit{SQF5-70} from Grundfos. These are powered by  a \textit{universal motor}. A universal motor can be controlled by regulating the current supplied to the motor. Figure \ref{fig:wp_power_flow_curve} from the datasheet provided by the manufacturer relates the power to water depth and flow. Similarly, the figures for the power rating for the other flexible loads are found in the datasheets and included in \ref{tab:flexible_loads_characteristics}. The daily energy demand for the water pump and heater is determined as the average historical daily consumption. For the two loads that have not been connected, the maize mill and rental batteries, their daily demand is determined through internal economic calculations by DCP on how often they need to run to be economically feasible for DCP to install at the sites.\\
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/wp_sqf25-2_power_curve.png}
     \caption[Water pump power/flow-curve]{Power-flow curve for the water pump installed at Chiwoza. Along the y-axis is the flow measured in [m2/h] while along the x-axis is the power in kW. The blue lines show the depth of the well.}
@@ -383,12 +372,12 @@ As these loads are more clearly defined, the values can be found from datasheets
     \label{tab:flexible_loads_characteristics}
 \end{table}
 
-It is evident that most loads can neither be deferred, dimmed or interrupted without a penalty. These loads are inflexible, their demand can not be shifted or reduced, it either has to be met or not met. For these loads, it becomes important to predict the demand, so that one can adjust accordingly. The forecasting of inflexible loads are the key idea of the following chapter. 
+It is evident that most loads can neither be deferred, dimmed or interrupted without a penalty. These loads are inflexible, their demand cannot be shifted or reduced, it either has to be met or not met. For these loads, it becomes important to predict the demand, so that one can adjust accordingly. The forecasting of inflexible loads is the key idea of the following chapter. 
 
 
 \section{Load Forecasting }\label{seq:load_forecasting}
 
-Instantaneous consumption is measured by the system. Knowing how demand will behave in the future enables informed decision-making on how to allocate produced energy between loads and the battery for the optimal operation within a determined time-window. As demand is neither known fully in advance nor fully deterministic on past and current conditions, the process of making predictions about future demand is non-trivial. For this application, several \textit{persistence} and \textit{ARIMA} models were developed and implemented to better the accuracy of forecasted future demand.\\
+Instantaneous consumption is measured by the system. Knowing how demand will behave in the future enables informed decision-making on how to allocate produced power between loads and the battery for the optimal operation within a determined time-window. As demand is neither known fully in advance nor fully deterministic on past and current conditions, the process of making predictions about future demand is non-trivial. For this application, several \textit{persistence} and \textit{ARIMA} models were developed and implemented to better the accuracy of forecasted future demand.\\
 
 The process for load forecasting in this thesis consists of the following steps:
 \begin{itemize}
@@ -406,37 +395,37 @@ The process for load forecasting in this thesis consists of the following steps:
     \item \textbf{Compare ARIMA candidates against each other and the best persistence model by testing over a longer time-frame}
 \end{itemize}
 
-The process has to be performed for every circuit connected to the system. However, within this section, the process in its entirety will only be illustrated for one specific meter - \textit{The medical light at Chiwoza}. The other meters will be included at the end of this section with their starting point and resulting best model found from the analysis.\\
+The process has to be performed for every circuit connected to the system. However, within this section, the process in its entirety will only be illustrated for one specific meter - \textit{The medical light at Chiwoza}. The other meters will be included at the end of this section with their starting point and the resulting best model found from the analysis.\\
 
 \subsection{Persistence Model}
 As outlined in section \ref{seq:stat_forecasting}, a persistence model is amongst the simplest and most intuitive models for forecasting. It serves as a baseline against which to compare the more advanced models.\\
 
-Based on the analysis in \ref{seq:periodicity}, past consumption is expected to contain information about future consumption. Hence a \textit{unweighted average persistence} model was developed to forecast the consumption of each meter. The model is a compromise between the accuracy and complexity of tuning.\\
+Based on the analysis in \ref{seq:periodicity}, past consumption is expected to contain information about future demand. Hence a \textit{unweighted average persistence} model was developed to forecast the demand of each meter. The model is a compromise between the accuracy and complexity of tuning.\\
 
-The models were tested by a range of look-back periods estimating the consumption of all hours of a single day. The \textit{MAE} between the forecasted and actual consumption was used to compare the models. This yielded a daily plot like \ref{fig:maeVlookback_chiwoza_med_light_20231128}. From this, a few candidates could be picked for testing over a longer period. This was done in figure \ref{fig:maeVlookback_chiwoza_med_light202311}. The difference between the plots can be difficult to assert from the plot. Considering the average MAE across the whole month, shown in \ref{tab:avg_mae_chiwoza_med_persistence_2023}, a model with a look-back period of 32 days yields the lowest value. An average MAE of 0.052 means that an error of 52W is expected. In the plot in figure \ref{fig:maeVlookback_chiwoza_med_light202311} a look-back period of 3 days yields the lowest maximum MAE of about 90W. The choice of model depends on the intended usage. Because the persistence model will in this design be used as a baseline to compare the ARIMA, the model with the best average MAE will be chosen.  
+The models were tested by a range of look-back periods estimating the demand of all hours of a single day. The \textit{MAE} between the forecasted and actual consumption was used to compare the models. This yielded a daily plot like \ref{fig:maeVlookback_chiwoza_med_light_20231128}. From this, a few candidates could be picked for testing over a longer period. This was done in figure \ref{fig:maeVlookback_chiwoza_med_light202311}. The difference between the plots can be difficult to assert from the plot. Considering the average MAE across the whole month, shown in \ref{tab:avg_mae_chiwoza_med_persistence_2023}, a model with a look-back period of 32 days yields the lowest value. An average MAE of 0.052 means that an error of 52W is expected. In the plot in figure \ref{fig:maeVlookback_chiwoza_med_light202311} a look-back period of 3 days yields the lowest maximum MAE of about 90W. The choice of model depends on the intended usage. Because the persistence model will in this design be used as a baseline to compare the ARIMA, the model with the best average MAE will be chosen.  
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/maeVlookback_chiwoza_med_light_20231128.png}
-    \caption[MAE vs lookback-period Medical Light Chiwoza 20231128]{MAE vs Look-back period for medical light consumption at Chiwoza 2023-11-28.}
+    \caption[MAE vs lookback-period Medical Light Chiwoza 20231128]{MAE vs Look-back period for medical light demand at Chiwoza 2023-11-28.}
     \label{fig:maeVlookback_chiwoza_med_light_20231128}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/maeVlookback_chiwoza_med_light_202311.png}
-    \caption[MAE vs look-back Medical light 202311]{MAE vs Look-back period for medical light consumption at Chiwoza during the whole of November 2023. Using four persistence models with different look-back period \textit{k}. (green:\textit{k}=3, purple:\textit{k}=6, red:\textit{k}=10), turquoise:\textit{k}=32)}
+    \caption[MAE vs look-back Medical light 202311]{MAE vs Look-back period for medical light demand at Chiwoza during the whole of November 2023. Using four persistence models with different look-back periods \textit{k}. (green:\textit{k}=3, purple:\textit{k}=6, red:\textit{k}=10), turquoise:\textit{k}=32)}
     \label{fig:maeVlookback_chiwoza_med_light202311}
 \end{figure}
 
 \begin{table}[]
     \centering
     \begin{tabular}{c|c}
-         Look-back period (days)& Average MAE  \\
-         3& 0.056\\
-         6& 0.054\\
-         10& 0.055\\
-         32& 0.052
+         Look-back period (days)& Average MAE (W) \\
+         3& 56\\
+         6& 54\\
+         10& 55\\
+         32& 52
     \end{tabular}
     \caption[Average MAE persistence models]{Caption}
     \label{tab:avg_mae_chiwoza_med_persistence_2023}
@@ -451,22 +440,22 @@ The second model used for load forecasting is the ARIMA-model. The model was sel
     \item \textit{P}    -   The order of the auto-regressive model shifted back one period.
     \item \textit{D}    -   The amount of terms one period back shifted to include directly.
     \item \textit{Q}    -   The order of the moving average model shifted back one period.
-    \item \textit{s}    -   The period of the time series.
+    \item \textit{s}    -   The period of the time-series.
 \end{itemize}
 
-Of these, only the time series period, \textit{s}, is known in advance. From the analysis, it is known that the consumption follows a daily cycle. The period is therefore equal to the number of samples within a day, which if done on an hourly basis equals 24.\\
+Of these, only the time-series period, \textit{s}, is known in advance. From the analysis, it is known that the demand follows a daily cycle. The period is therefore equal to the number of samples within a day, which if done on an hourly basis equals 24.\\
 
-The other parameters is to be obtained through a statistical analysis of the time-series for each meter. The first step of this process is to examine the original time-series for a given meter. Figure \ref{fig:con_ts_chiwoza_med_light_20231110-25} showcasing the consumption from medical lights at Chiwoza is a seemingly stationary time-series. The series oscillates, but there is no evident trend. This suggests stationarity. Further evidence can be found be using the augmented dicker-fuller test, where the results are shown in \ref{tab:result_dicker-fuller} strongly reject the null hypothesis of non-stationarity between the days. Figure \ref{fig:con_acf_h_chiwoza_med_light_20231110-25} confirms this, as the ACF decreases to zero after a few lags. This means that the auto-regressive and moving average model can be utilized without differentiating the time-series first. Although it is still possible that one can achieve better results by a differentiated time-series.\\
+The other parameters are to be obtained through a statistical analysis of the time-series for each meter. The first step of this process is to examine the original time-series for a given meter. Figure \ref{fig:con_ts_chiwoza_med_light_20231110-25} showcasing the consumption of medical lights at Chiwoza is a seemingly stationary time-series. The series oscillates, but there is no evident trend. This suggests stationarity. Further evidence can be found by using the augmented dicker-fuller test, where the results are shown in \ref{tab:result_dicker-fuller} strongly reject the null hypothesis of non-stationarity between the days. Figure \ref{fig:con_acf_h_chiwoza_med_light_20231110-25} confirms this, as the ACF decreases to zero after a few lags. This means that the auto-regressive and moving average model can be utilized without differentiating the time-series first. Although it is still possible that one can achieve better results by a differentiated time-series.\\
 
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\linewidth]{Figures/06Design/con_ts_chiwoza_med_light_20231110-25.png}
     \caption[Medical Light consumption Chiwoza 20231110-1125]{Consumption medical light Chiwoza as a time-series between 2023-11-10 and 2023-11-25.}
     \label{fig:con_ts_chiwoza_med_light_20231110-25}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/con_acf_h_chiwoza_med_light_20231110-25.png}
     \caption[ACF Medical Light consumption Chiwoza 20231110-1125]{ACF of the hourly consumption of the medical lights at Chiwoza between 2023-11-10 and 2023-11-25.}
@@ -485,9 +474,9 @@ The other parameters is to be obtained through a statistical analysis of the tim
     \label{tab:result_dicker-fuller}
 \end{table}
 
-Within a day, we know that there is a seasonal pattern. Looking at figure \ref{fig:con_acf_h_chiwoza_med_light_20231125} this means that the ACF does not decay, and an MA-model cannot be utilized. The PACF however, shown in \ref{fig:con_pacf_h_chiwoza_med_light_20231125} shows clear contributions from certain terms. A pure auto-regressive model combined with some seasonal terms is therefore a candidate. Differentiating the time-series and finding the ACF and PACF within a day produces the plots shown in \ref{fig:con_d_acf_pacf_h_chiwoza_med_light_20231125}. Here the ACF plot decays faster, meaning that a candidate with a differential term can be included.\\
+Within a day, we know that there is a seasonal pattern. Looking at figure \ref{fig:con_acf_h_chiwoza_med_light_20231125} this means that the ACF does not decay, and an MA-model cannot be utilized. The PACF however, shown in figure \ref{fig:con_pacf_h_chiwoza_med_light_20231125} shows clear contributions from certain terms. A pure auto-regressive model combined with some seasonal terms is therefore a candidate. Differentiating the time-series and finding the ACF and PACF within a day produces the plots shown in figure \ref{fig:con_d_acf_pacf_h_chiwoza_med_light_20231125}. Here the ACF plot decays faster, meaning that a candidate with a differential term can be included.\\
 
-\begin{figure}
+\begin{figure}[]
   \centering
 
   % First Subfigure
@@ -513,7 +502,7 @@ Within a day, we know that there is a seasonal pattern. Looking at figure \ref{f
   \label{fig:con_acf_pacf_h_chiwoza_med_light_20231125}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[]
   \centering
 
   % First Subfigure
@@ -541,7 +530,7 @@ Within a day, we know that there is a seasonal pattern. Looking at figure \ref{f
 
 Section \ref{seq:tuning_arima} outlines the process of finding the \textit{p} and \textit{q} values of the model using the partial auto-correlation function (PACF) and the auto-correlation function(ACF) respectively. From figure \ref{fig:con_d_acf_pacf_h_chiwoza_med_light_20231125} we see that ARIMA(1,1,2)(1,1,1) can be a candidate. There is however still seasonality apparent in figure \ref{fig:con_d_acf_h_chiwoza_med_light_20231125}. Differentiating the time-series again removes all intra-day seasonality, as seen in figure \ref{fig:con_d2_acf_h_chiwoza_med_light_20231125} by the complete decay of the ACF besides the full lag. Combined with the PACF plot in figure \ref{fig:con_d2_pacf_h_chiwoza_med_light_20231125} we see that ARIMA(1,2,2)(1,1,1) could be another candidate. \\
 
-\begin{figure}
+\begin{figure}][]
   \centering
 
   % First Subfigure
@@ -567,7 +556,7 @@ Section \ref{seq:tuning_arima} outlines the process of finding the \textit{p} an
   \label{fig:con_d2_acf_pacf_h_chiwoza_med_light_20231125}
 \end{figure}
 
-The three candidate listed in \ref{tab:arima_candidate_chiwoza_med_light} can be implemented and tested over a wider time period. Model III looks clearly worse from the plot, but it is difficult separating I and II. From table \ref{tab:arima_candidate_mae_chiwoza_med_light} we see that model II performed slightly better on average MAE over the month of November. It also has a lower maximum MAE than model I. Of the ARIMA models, only I and II managed to beat the baseline set by the persistence model. Looking at the forecasted time-series for November from model II versus the actual time-series in figure \ref{fig:atVSft_chiwoza_medical_light_202311} , the model has acceptable performance. 
+The three candidates listed in table \ref{tab:arima_candidate_chiwoza_med_light} can be implemented and tested over a wider time period. Model III looks clearly worse from the plot, but it is difficult separating I and II. From table \ref{tab:arima_candidate_mae_chiwoza_med_light} we see that model II performed slightly better on average MAE over the month of November. It also has a lower maximum MAE than model I. Of the ARIMA models, only I and II managed to beat the baseline set by the persistence model. Looking at the forecasted time-series for November from model II versus the actual time-series in figure \ref{fig:atVSft_chiwoza_medical_light_202311} , the model has acceptable performance. 
 
 \begin{table}[]
     \centering
@@ -578,42 +567,42 @@ The three candidate listed in \ref{tab:arima_candidate_chiwoza_med_light} can be
          II& ARIMA(1,1,2)(1,1,1)\\
          III& ARIMA(1,2,2)(1,1,1)\\
     \end{tabular}
-    \caption[ARIMA candidates medical light consumption Chiwoza]{ARIMA model candidates for medical light consumption Chiwoza}
+    \caption[ARIMA candidates medical light demand Chiwoza]{ARIMA model candidates for medical light demand Chiwoza}
     \label{tab:arima_candidate_chiwoza_med_light}
 \end{table}
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/mae_arima_chiwoza_med_light_202311.png}
-    \caption[MAE ARIMA candidates medical light consumption Chiwoza]{MAE of the 3 ARIMA models listed in \ref{tab:arima_candidate_chiwoza_med_light} over the month of November 2023.Included is also the MAE of a persistence model with look-back period of 32 days}
+    \caption[MAE ARIMA candidates medical light demand Chiwoza]{MAE of the 3 ARIMA models listed in \ref{tab:arima_candidate_chiwoza_med_light} over the month of November 2023.Included is also the MAE of a persistence model with look-back period of 32 days}
     \label{fig:mae_arima_chiwoza_med_light_202311}
 \end{figure}
 
 \begin{table}[]
     \centering
     \begin{tabular}{c|c}
-         \#& average MAE \\
+         \#& average MAE (W) \\
          \hline
-         I& 0.049\\
-         II& 0.049\\
-         III& 0.052\\
-         $persistence_{32}$& 0.052\\
+         I& 49\\
+         II& 49\\
+         III& 52\\
+         $persistence_{32}$& 52\\
     \end{tabular}
-    \caption[Average MAE ARIMA candidates and persistence model medical light consumption Chiwoza]{ARIMA model candidates' MAE for medical light consumption estimation over the month of November at Chiwoza. Included is the average MAE of a persistence model with look-back period of 32 days.}
+    \caption[Average MAE ARIMA candidates and persistence model medical light demand Chiwoza]{ARIMA model candidates' MAE for medical light demand estimation over the month of November at Chiwoza. Included is the average MAE of a persistence model with look-back period of 32 days.}
     \label{tab:arima_candidate_mae_chiwoza_med_light}
 \end{table}
 
-\begin{figure}
+\begin{figure}[]
     \centering
     \includegraphics[width=\textwidth]{Figures/06Design/atVSft_chiwoza_medical_light_202311.png}
-    \caption[Actual vs Forecasted consumption medical light consumption]{The actual hourly consumption vs the forecast from the ARIMA model II in \ref{tab:arima_candidate_chiwoza_med_light} for medical light consumption Chiwoza November 2023.}
+    \caption[Actual vs Forecasted medical light demand]{The actual hourly consumption vs the forecasted demand from the ARIMA model II in \ref{tab:arima_candidate_chiwoza_med_light} for medical light consumption Chiwoza November 2023.}
     \label{fig:atVSft_chiwoza_medical_light_202311}
 \end{figure}
 
-As mentioned earlier in this section, this process of selecting ARIMA candidates, comparing them against each other and a persistence model has to be repeated for all the loads connected to a system that is to be forecasted. The result of this is shown in \ref{tab:load_forecasting_results_chiwoza}. In section \ref{seq:periodicity}, some loads, like the Guardian shelter Socket was found to have a strong weekday pattern. To accommodate for this, the ARIMA was modified to include this behavior. The algorithm, shown in \ref{alg:arima_forecast_periodic}, runs a different ARIMA model for weekdays and weekend. Furthermore, when gathering historic data for its forecast, it discards days it has been asked to ignore. In \ref{fig:forecasting_results_chiwoza_guard_socket} this is seen as a model which is able to handle the shape of high consumption during the week and none during weekend.
+As mentioned earlier in this section, this process of selecting ARIMA candidates, comparing them against each other and a persistence model has to be repeated for all the loads connected to a system that is to be forecasted. The result of this is shown in \ref{tab:load_forecasting_results_chiwoza}. In section \ref{seq:periodicity}, some loads, like the Guardian shelter Socket were found to have a strong weekday pattern. To accommodate for this, the ARIMA was modified to include this behavior. The algorithm, shown in \ref{alg:arima_forecast_periodic}, runs a different ARIMA model for weekdays and weekends. Furthermore, when gathering historic data for its forecast, it discards days it has been asked to ignore. In \ref{fig:forecasting_results_chiwoza_guard_socket} this is seen as a model which is able to handle the shape of high consumption during the week and none during the weekend.
 
 \begin{algorithm}
-\caption{ARIMA forecaster weekday periodic}\label{alg:arima_forecast_periodic}
+\caption{ARIMA forecaster weekday periodic (Pseudocode)}\label{alg:arima_forecast_periodic}
 \begin{algorithmic}
     \State$dow = dayOfWeek(date) $
     \If{$dow == Sat | dow == Sun$}
@@ -832,7 +821,7 @@ As mentioned earlier in this section, this process of selecting ARIMA candidates
     \begin{tabular}{c|c|c|c|c}
         Load & Forecasting model & Average MAE (W) & Average (W) & Plot  \\
         \hline
-        Medical Light   & ARIMA(1,1,2)(1,1,1) & 25  &  113  &   \ref{fig:atVSft_chiwoza_medical_light_202311}\\
+        Medical Light   & ARIMA(1,1,2)(1,1,1) & 49  &  113  &   \ref{fig:atVSft_chiwoza_medical_light_202311}\\
         Medical Socket  & ARIMA(2,1,1)(0,1,1) & 10  &   11  &   \ref{fig:forecasting_results_chiwoza_medical_socket}\\
         Staff Light 1   & ARIMA(1,0,0)(1,1,2) & 26  &  46   &   \ref{fig:forecasting_results_chiwoza_staff_light1}\\
         Staff Light 2   & ARIMA(1,0,0)(1,1,1) & 3   &  6    &   \ref{fig:forecasting_results_chiwoza_staff_light2}\\
@@ -842,22 +831,22 @@ As mentioned earlier in this section, this process of selecting ARIMA candidates
         Guardian Shelter Light  & ARIMA(6,1,1)(0,1,1) & 3   &   12  &   \ref{fig:forecasting_results_chiwoza_guard_light}\\
         Guardian Shelter Socket  & ARIMA(1,0,1)(0,1,2) & 1.4  &  1.8  &   \ref{fig:forecasting_results_chiwoza_guard_socket}\\
     \end{tabular}
-    \caption[Chiwoza consumption forecasting results]{Loads at Chiwoza with their deduced forecast model.}
+    \caption[Chiwoza demand forecasting results]{Loads at Chiwoza with their deduced forecast model.}
     \label{tab:load_forecasting_results_chiwoza}
 \end{table}
 
 
 
-The forecasting yields large errors, especially when forecasting loads with large spikes in the consumption, such as the Chiwoza medical socket seen in figure \ref{fig:forecasting_results_chiwoza_medical_socket}. Here the forecast have the correct shape, but miss the timing. Sudden and high spikes in consumption are expected to be hard to forecast from statistical data alone. 
+The forecasting yields large errors, especially when forecasting loads with large spikes in consumption, such as the Chiwoza medical socket seen in figure \ref{fig:forecasting_results_chiwoza_medical_socket}. Here the forecast has the correct shape, but misses the timing. Sudden and high spikes in consumption are expected to be hard to forecast from statistical data alone. 
 
 \subsection{Forecast update}
-In the results from the previous section, consumption has been forecasted once every day, and compared to the actual. Instead in the proposed control system, a new forecast will be made every time there is a new measurement. This is done by including the measurement into the historic data used to make the forecast. This frequency of updated forecast will increase accuracy. In \ref{fig:atVSft_chiwoza_med_light20231125} the forecast for medical light consumption at Chiwoza at the 25th of November 2023 is updated each hour. In the this forecast the MAE is reduced by about a third compared to the average MAE for the daily forecasts between October 23rd- December 23rd 2023.\\
+In the results from the previous section, demand has been forecasted once every day, and compared to the actual. Instead in the proposed control system, a new forecast will be made every time there is a new measurement. This is done by including the measurement in the historic data used to make the forecast. This frequency of updated forecasts will increase accuracy. In figure \ref{fig:atVSft_chiwoza_med_light20231125} the forecast for medical light demand at Chiwoza on the 25th of November 2023 is updated each hour. In this forecast, the MAE is reduced by about 84\%, from 49 to 7.8, compared to the average MAE for the daily forecasts between October 23rd- December 23rd 2023.\\
  
 
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{Figures/06Design/atVSft_chiwoza_med_light20231125.png}
-    \caption[Hourly updated forecast Chiwoza medical light]{Hourly updated forecast for medical light consumption at Chiwoza for November 25th 2023. $MAE=7.8W$}
+    \caption[Hourly updated forecast Chiwoza medical light]{Hourly updated forecast for medical light demand at Chiwoza for November 25th 2023. $MAE=7.8W$}
     \label{fig:atVSft_chiwoza_med_light20231125}
 \end{figure}
 
@@ -865,11 +854,11 @@ In the results from the previous section, consumption has been forecasted once e
 
 \section{Production analysis}\label{seq:prod_analysis}
 
-The sole production module in the systems are the PV-modules. An outline of its dynamics and connection to irradiance is given in section \ref{seq:pv_and_irradiance}. As mentioned in that section, irradiance can be classified into different types. Each of which have its own effect on PV production and measured individually with the right measurement devices.\\
+The sole production module in the systems is the PV-modules. An outline of its dynamics and connection to irradiance is given in section \ref{seq:pv_and_irradiance}. As mentioned in that section, irradiance can be classified into different types. Each of these has its effect on PV production and is measured individually with the right measurement devices.\\
 
-There are no measurement devices for irradiance at the sites, but there exists \textit{geographic information systems} (GIS)-tools such as the European PVGIS\cite{pvgis} that gives average daily values each month based upon large weather databases. Figure \ref{fig:irradiance_daily_pvgis_chiwoza_dec} displays the downloaded average daily irradiance downloaded from PVGIS at the Chiwoza during December.\\
+There are no measurement devices for irradiance at the sites, but there exists \textit{geographic information systems} (GIS)-tools such as the European PVGIS\cite{pvgis} that give average daily values each month based upon large weather databases. Figure \ref{fig:irradiance_daily_pvgis_chiwoza_dec} displays the downloaded average daily irradiance downloaded from PVGIS at the Chiwoza during December.\\
 
-The daily average irradiance will have a seasonal trend, given the changing position between the sun and the earth. Figure \ref{fig:irradiance_monthly_pvgis_chiwoza_2020} shows how the irradiance varies throughout the year. It is therefor important to gather the daily average corresponding to the correct month.
+The daily average irradiance will have a seasonal trend, given the changing position between the Sun and the Earth. Figure \ref{fig:irradiance_monthly_pvgis_chiwoza_2020} shows how the irradiance varies throughout the year. It is therefore important to gather the daily average corresponding to the correct month.
 
 \begin{figure}
     \centering
@@ -885,9 +874,9 @@ The daily average irradiance will have a seasonal trend, given the changing posi
     \label{fig:irradiance_monthly_pvgis_chiwoza_2020}
 \end{figure}
 
-There is a strong connection between weather and PV production, seen from for instance equation \ref{eq:irradiance}. However, there are no weather measurement devices at the sites due to the cost of such equipment. Information about the weather is gained through the online databases of the Norwegian Meteorological Agency. Both weather forecast and weather measurements are fetched. Both of these have an inherent quite large uncertainty.\\
+There is a strong connection between weather and PV production, seen from for instance equation \ref{eq:irradiance}. However, there are no weather measurement devices at the sites due to the cost of such equipment. Information about the weather is gained through the online databases of the Norwegian Meteorological Agency. Both weather forecasts and weather measurements are fetched. Both of these have an inherent quite large uncertainty.\\
 
-Besides the lack of measurements, another complicating factor for production analysis is the underutilization at the sites. The sites can not deliver more power than consumed by the loads, stored in the battery or lost in the system. Hence, as load consumption, in general, is low, the production is far below its full potential. This can be seen in figure \ref{fig:yieldVSirradiance_day_chiwoza_202309}. The figure shows the average, maximum and minimum recorded production for each hour of the day in September 2023. This is plotted against the GHI fetched from PVGIS\cite{pvgis}. While the scale between irradiance and production is different, the important thing is the shape of the irradiance curve versus the production curves. While the points of the GHI shows a quadratic curve, the production peaks early in the day, then tapers of quickly. This is because the system use a lot of power early in the day, to charge the battery, but once the battery is charged up to 90\% the production drops sharply, only supplying the low amount of load connected during the day. The peak toward the end of the day is because of the charging algorithm of the batteries outlined in section \ref{seq:current_syst}. If the load was not a limiting factor, so that all available power was utilized, one would expect a production curve with a similar curve to the irradiance curve due to their tight relationship.
+Besides the lack of measurements, another complicating factor for production analysis is the underutilization at the sites. The sites cannot deliver more power than consumed by the loads, stored in the battery or lost in the system. Hence, as load consumption, in general, is low, the production is far below its full potential. This can be seen in figure \ref{fig:yieldVSirradiance_day_chiwoza_202309}. The figure shows the average, maximum and minimum recorded production for each hour of the day in September 2023. This is plotted against the GHI fetched from PVGIS\cite{pvgis}. While the scale between irradiance and production is different, the important thing is the shape of the irradiance curve versus the production curves. While the points of the GHI show a quadratic curve, the production peaks early in the day, and then tapers off quickly. This is because the system uses a lot of power early in the day, to charge the battery, but once the battery is charged up to 90\% the production drops sharply, only supplying the low amount of load connected during the day. The peak toward the end of the day is because of the charging algorithm of the batteries outlined in section \ref{seq:current_syst}. If the load was not a limiting factor, so that all available power was utilized, one would expect a production curve with a similar curve to the irradiance curve due to their tight relationship.
 
 \begin{figure}
   \centering
@@ -895,8 +884,6 @@ Besides the lack of measurements, another complicating factor for production ana
     \caption[Yield vs irradiance September 2023]{Average, max and min yield vs GHI Chiwoza September 2023}
     \label{fig:yieldVSirradiance_day_chiwoza_202309}
 \end{figure}
-
-%\todo{installed equipment}
 
 \section{Forecasting production}\label{seq:prod_forecasting}
 The systems are dependent on the PV-production to satisfy load demand.  Knowing the timing and magnitude of the production is critical to make informed decisions on the operation of the systems. As mentioned in the analysis, the production is limited by the load consumption. As the goal of the thesis is to find how load can be moved, added and controlled, the current production is therefore far less interesting than the potential production.\\
@@ -907,14 +894,14 @@ Similarly as for the load forecasting, one would expect an auto-regressive featu
 
 Luckily, it is far easier to deduce a physical model of production than for load, given the unpredictable nature of load consumption. A physical model removes the need for past data for forecasting. 
 
-The physical model is based on the approach in section \ref{seq:physical_forecasting}, with especially equation \ref{eq:pv_power_full} showing the relationship between irradiance and power. The irradiance is modified by equation \ref{eq:irradiance} to include the effect of the cloud cover. In total, the physical model for the PV-production from a PV-module with $n_{panels}$ PV-panels is defined in \ref{eq:pv_prod_physical_model}. The inputs to these models are the parameters relating to the panels, global- and diffuse irradiance and cloud cover. The panel parameters such as $P_{STC}$, $G_STC$ and $n_panels$ are known, while the $G_{GHI}$ and $G_{DHI}$ does not change from day to day within a month. The only factor modifying the model to give a variable daily estimate is the cloud cover. This is gathered from weather forecasts. 
+The physical model is based on the approach in section \ref{seq:physical_forecasting}, with especially equation \ref{eq:pv_power_full} showing the relationship between irradiance and power. The irradiance is modified by equation \ref{eq:irradiance} to include the effect of the cloud cover. In total, the physical model for the PV-production from a PV-module with $n_{panels}$ PV-panels is defined in \ref{eq:pv_prod_physical_model}. The inputs to these models are the parameters relating to the panels, global- and diffuse irradiance and cloud cover. The panel parameters such as $P_{STC}$, $G_STC$ and $n_panels$ are known, while the $G_{GHI}$ and $G_{DHI}$ do not change from day to day within a month. The only factor modifying the model to give a variable daily estimate is the cloud cover. This is gathered from weather forecasts. 
 
 \begin{equation}
     P_{PV} = \frac{P_{STC}}{G_{STC}}(G_{GHI}(1-f)+G_{DHI}f)n_{panels}
     \label{eq:pv_prod_physical_model}
 \end{equation}
 
-As mentioned in section \ref{seq:prod_analysis}, actual measured production at the site is a poor comparison to estimated potential production because it is limited by consumption. This makes it difficult to test the model. However, if one assumes the model is reasonable, the model would given accurate weather measurements give an accurate estimate of potential production. It is then possible to test the model with weather measurements against the model using weather forecasts. In figure \ref{fig:prod_atVSft_chiwoza_20231201} the model is tested with a weather forecast from the start of the period plotted against a weather measurement taken at each hour during the day. The weather measurement, gathered from satellite data\cite{met.no}, is the best available measurement of the weather for each hour. Hence, the model based on the measurement represents the best available estimate of the potential production given actual weather data and not limited by consumption. The figure shows that during the first few hours, the forecast is identical to the actual estimate. Later on the difference between the two varies in both directions. The cumulative difference indicates that the forecast estimates a lower potential production for this day. 
+As mentioned in section \ref{seq:prod_analysis}, actual measured production at the site is a poor comparison to estimated potential production because it is limited by consumption. This makes it difficult to test the model. However, if one assumes the model is reasonable, the model would given accurate weather measurements give an accurate estimate of potential production. It is then possible to test the model with weather measurements against the model using weather forecasts. In figure \ref{fig:prod_atVSft_chiwoza_20231201} the model is tested with a weather forecast from the start of the period plotted against a weather measurement taken at each hour during the day. The weather measurement, gathered from satellite data\cite{met.no}, is the best available measurement of the weather for each hour. Hence, the model based on the measurement represents the best available estimate of the potential production given actual weather data and not limited by consumption. The figure shows that during the first few hours, the forecast is identical to the actual estimate. Later on, the difference between the two varies in both directions. The cumulative difference indicates that the forecast estimates a lower potential production for this day. 
 
 \begin{figure}
     \centering
@@ -923,7 +910,6 @@ As mentioned in section \ref{seq:prod_analysis}, actual measured production at t
     \label{fig:prod_atVSft_chiwoza_20231201}
 \end{figure}
 
-%\todo{Plot over a month}
 
 \subsection{Forecast update}
 Similarly, as for load forecasting, the production forecast is updated every time there is a new weather or production measurement. This is shown for December 1st 2023 in figure \ref{fig:atVSft_prod_chiwoza20231220} where an hourly updated forecast leads to more halving of MAE compared to the forecast over the same period in figure \ref{fig:prod_atVSft_chiwoza_20231201}.
@@ -936,7 +922,7 @@ Similarly, as for load forecasting, the production forecast is updated every tim
 \end{figure}
 
 \subsection{System Loss}
-The model in \ref{eq:pv_prod_physical_model} neglects energy lost within the system. There are plenty of factors leading to a reduction in the energy available. While we know that the inverter has a peak efficiency of 96\% and the solar charger a peak efficiency of 99\% from the datasheet, the wiring and panel losses are unknown. There is therefore not enough information available to accurately estimate the system losses in the current system. In \textit{(Chimtavee A. and Ketjoy, N,2012)}, the authors found an average of loss of $26.27\%$ over a whole year.\cite{Chimtavee2012-gg} Modifying the production forecast in \ref{eq:pv_prod_physical_model} by a constant loss factor \textit{h}, yields model shown in equation \ref{eq:pv_prod_physical_model_loss}.
+The model in \ref{eq:pv_prod_physical_model} neglects energy lost within the system. There are plenty of factors leading to a reduction in the energy available. While we know that the inverter has a peak efficiency of 96\% and the solar charger has a peak efficiency of 99\% from the datasheet, the wiring and panel losses are unknown. There is therefore not enough information available to accurately estimate the system losses in the current system. In \textit{(Chimtavee A. and Ketjoy, N,2012)}, the authors found an average loss of $26.27\%$ over a whole year.\cite{Chimtavee2012-gg} Modifying the production forecast in \ref{eq:pv_prod_physical_model} by a constant loss factor \textit{h}, yields model shown in equation \ref{eq:pv_prod_physical_model_loss}.
 
 \begin{equation}
     P_{PV} = \frac{P_{STC}}{G_{STC}}(G_{GHI}(1-f)+G_{DHI}f)n_{panels}*(1-h)
@@ -953,7 +939,7 @@ A rule-based control system divides the state space into distinct sections and a
 
 While machine learning has been proposed by several papers for energy management systems, as in \textit{(Philipo GH. et al., 2022)},\cite{Philipo2022-rx} it was not chosen for this thesis because of the tuning of such a system can be oblique. Therefore, an optimisation approach was chosen, inspired by the works of \textit{(Salazar A. et al.,2020)} and \textit{(Sadek SM. et al., 2020)} found in the literature survey. Both continuous and discrete optimisation (Integer Programming) was attempted, however with the latter there was an issue of solution stability. Hence the optimizer is designed based on continuous optimization. \\
 
-A non-linear optimization problem is defined as \todo{check break}
+A non-linear optimization problem is defined as
 
 \begin{align}
     \min_x\hspace{0.5cm} & J(x) &\text{   s.t.   } & \begin{bmatrix}
@@ -968,7 +954,7 @@ A non-linear optimization problem is defined as \todo{check break}
 To construct the optimizer problem an objective function, selection variable and constraints need to be defined. The selection variable should be based on the control options of the control system. These are 
 \begin{itemize}
     \item \textit{Allocating power to load} -   The control system can allocate a certain amount of power to a load.
-    \item \textit{Charge/discharge the battery} - The control system can allow a certain amount of energy to be discharged or charged to/from the battery over a period of time.
+    \item \textit{Charge/discharge the battery} - The control system can allow a certain amount of power to be discharged or charged to/from the battery over a period of time.
 \end{itemize}
 
 From this the selection variable $\mathbf{x}$ is defined as 
@@ -988,9 +974,9 @@ where $\mathbf{p_b}$ is a vector giving the charge/discharge allowed from the ba
                         \end{bmatrix},
 \end{equation}
 
-where $p_{bk}$ is the energy charged/discharged at time-step \textit{k}.\\
+where $p_{bk}$ is the power charged/discharged at time-step \textit{k}.\\
 
-The matrix $\mathbf{L}$ represents the energy allocated to the various load for all time-steps within the prediction horizon. If there are a total of $\mathbf{S}$ loads connected to the system, then the $\mathbf{L}$ matrix is defined as
+The matrix $\mathbf{L}$ represents the power allocated to the various loads for all time-steps within the prediction horizon. If there are a total of $\mathbf{S}$ loads connected to the system, then the $\mathbf{L}$ matrix is defined as
 
 \begin{equation}
     \mathbf{L} = \begin{bmatrix}
@@ -1014,7 +1000,7 @@ The matrix $\mathbf{L}$ represents the energy allocated to the various load for 
                     \end{bmatrix}                     ,
 \end{equation}
 
-where $l_k^{(i)}$ is the energy allocated to load \textit{i} at time-step \textit{k}.\\
+where $l_k^{(i)}$ is the power allocated to load \textit{i} at time-step \textit{k}.\\
 
 The selection variable will be optimally found every time the optimizer is running. The other components of the optimizer; the objective function and constraints can be deduced once the selection variable $\mathbf{x}$ is defined. 
 
@@ -1081,7 +1067,7 @@ The last term included in the objective function is the one for the flexible loa
     \label{eq:J5}
 \end{equation}
 
-The different contributions to the objective function is combined to one as in 
+The different contributions to the objective function are combined into one as in 
 
 \begin{align}
     J &= J_1 + J_2 + J_3 + J_4 + J_5\notag\\
@@ -1116,7 +1102,7 @@ where
     k_2 \leq 0. \notag
 \end{align}
 
-Both $J_1$ and $J_2$ are, by virtue of being linear functions, convex and differentiable functions over the convex set $\mathit{S}: L\in [0,R]$. $J_3$, $J_4$ and $J_5$ are however non-differentiable, due to the conditionality of the $k_1$, $k_3$ and $k_4$ and the absolute value in $J_3$ and $J_5$. Regarding convexity, the absolute value of a variable is convex, making $J_5$ convex. The  convexity of $J_3$ and $J_4$ can be studied graphically. In figure \ref{fig:sketchJ3&J4} the two functions are sketched. As seen, they have a similar shape of linear functions separated by a region where the function value is zero. The secant between any two point along the graph lies only in its epigraph. Because of this, the functions are convex. This makes the overall objective function convex and non-differentiable. The non-differentiability excludes solvers dependent on analytically finding the gradient or hessian of the objective function. 
+Both $J_1$ and $J_2$ are, by virtue of being linear functions, convex and differentiable functions over the convex set $\mathit{S}: \mathbf{L}\in [0,\mathbf{R}]$. $J_3$, $J_4$ and $J_5$ are however non-differentiable, due to the conditionality of the $k_1$, $k_3$ and $k_4$ and the absolute value in $J_3$ and $J_5$. Regarding convexity, the absolute value of a variable is convex, making $J_5$ convex. The  convexity of $J_3$ and $J_4$ can be studied graphically. In figure \ref{fig:sketchJ3&J4} the two functions are sketched. As seen, they have a similar shape of linear functions separated by a region where the function value is zero. The secant between any two points along the graph lies only in its epigraph. Because of this, the functions are convex. This makes the overall objective function convex and non-differentiable. The non-differentiability excludes solvers dependent on analytically finding the gradient or hessian of the objective function. 
 
 \begin{figure}
 % First Subfigure
@@ -1142,11 +1128,11 @@ Both $J_1$ and $J_2$ are, by virtue of being linear functions, convex and differ
   \label{fig:sketchJ3&J4}
 \end{figure}
 
-This amounts to a non-linear objective function which together with the constraints deduced in the next section for the optimization problem.
+This amounts to a non-linear objective function which together with the constraints deduced in the next section forms the optimization problem.
 
 \subsection{Constraints}
 
-The constraints are an integral part of the optimization problem, as it makes the algorithm conform to the conditions and bound set by the system. Constraints can reflect constraints on the actual dynamics of the physical system, but they can also be used to achieve a better performance within the physical bounds.\\
+The constraints are an integral part of the optimization problem, as they make the algorithm conform to the conditions and bounds set by the system. Constraints can reflect constraints on the actual dynamics of the physical system, but they can also be used to achieve a better performance within the physical bounds.\\
 
 The law of conservation of energy states that the total energy within a closed system can only be changed by energy either entering or leaving the system. Taking the microgrid as a closed system, energy can only enter from the PV-module and exit the system either as energy consumed or lost through the internal system resistance. Energy from the PV-module can be stored in the battery and discharged to supply load. Within a time-step $k$, this relationship can be described as 
 
@@ -1157,7 +1143,7 @@ The law of conservation of energy states that the total energy within a closed s
 
 Here positive $p_{pb}$ is defined as charging the battery, while negative $p_{pb}$ is defined as discharging the battery to supply the loads. The power from the solar module is here $p_{pv}$.\\
 
-On the battery dynamics there are additional constraint. The power charging of the battery at time-step $k$ can not exceed some $p_{b,max}$ and the discharge can not go below $p_{b,min}$. Similarly, the battery SOC at time-step $k$, $b_k$ can not exceed the maximum capacity $b_{max}$ and not go below to minimum $b_{min}$. 
+On the battery dynamics, there are additional constraints. The power charging of the battery at time-step $k$ cannot exceed some $p_{b,max}$ and the discharge cannot go below $p_{b,min}$. Similarly, the battery SOC at time-step $k$, $b_k$ cannot exceed the maximum capacity $b_{max}$ and not go below minimum $b_{min}$. 
 
 \begin{align}
     b_k \leq b_{max}\\
@@ -1167,58 +1153,44 @@ On the battery dynamics there are additional constraint. The power charging of t
     \forall k \in N \notag
 \end{align}
 
-However, as $p_b$ is part of the selection variable $x$, it can be included in the lower and upper bound on $x$. The other part of $x$, the allocation to the loads $\mathbf{L}$ also has and lower and upper bound. Naturally, the energy allocated to a load can not be less than zero. As a non-physical limit, but to achieve better results, a upper bound on the allocation to loads $L$ is set so that it cannot exceed the demand $R$. 
+However, as $p_b$ is part of the selection variable $x$, it can be included in the lower and upper bound on $x$. The other part of $x$, the allocation to the loads $\mathbf{L}$ also has and lower and upper bound. Naturally, the energy allocated to a load cannot be less than zero. As a non-physical limit, but to achieve better results, an upper bound on the allocation to loads $\mathbf{L}$ is set so that it cannot exceed the demand $\mathbf{R}$. 
 
 \begin{equation}
-    0 \leq L \leq R
+    0 \leq \mathbf{L} \leq \mathbf{R}
 \end{equation}
 
-For some loads however, this constraint can be modified. Some loads can be set to have a guaranteed availability. This can be done by adding their consumption to the lower and upper bound of the constraint. For instance, if load $\mathbf{l}^{(1)}$ is a refrigerator with rated consumption $e_1$ is to be guaranteed availability, the bound can look like
+For some loads, however, this constraint can be modified. Some loads can be set to have a guaranteed availability. This can be done by adding their consumption to the lower and upper bound of the constraint. For instance, if load $\mathbf{l}^{(1)}$ is a refrigerator with rated consumption $e_1$ is to be guaranteed availability, the bound can look like
 
 \begin{align}
-    e_1 &\leq \mathbf{l}^{(1)} \leq R^{(1)} + e_1\notag\\
-    0 &\leq L^{(2:S)} \leq R^{(2:S)}.   
+    e_1 &\leq \mathbf{l}^{(1)} \leq \mathbf{R}^{(1)} + e_1\notag\\
+    0 &\leq \mathbf{L}^{(2:S)} \leq \mathbf{R}^{(2:S)}.   
 \end{align}
 
 \subsection{Tuning}
-The outcome of an optimization is dependent on the weight attributed to the different parts of the objective function. The process of selecting appropriate parameters becomes an important to achieve acceptable performance. In the optimization problem defined in this section, the parameters to be determined are the weights $k_1$, $k_2$, $k_3$, $k_4$, $\mathbf{K}_5$ and the cost matrix \textbf{C}.\\ 
+The outcome of an optimization is dependent on the weight attributed to the different parts of the objective function. The process of selecting appropriate parameters becomes important to achieve acceptable performance. In the optimization problem defined in this section, the parameters to be determined are the weights $k_1$, $k_2$, $k_3$, $k_4$, $\mathbf{K}_5$ and the cost matrix \textbf{C}.\\ 
 
-All of the parameters are connected to a quantifiable, objective from the specification. Their values will therefor depend on how the different objectives are prioritized. Some of the parameters are or have the potential to be working against each other. For instance will a high $k_2$ incentivize high consumption, while a large, negative $k_1$ will decrease battery utilization. The key with these conflicting parameters is to achieve a tuning with the right relation between the parameters.\\
+All of the parameters are connected to a quantifiable, objective from the specification. Their values will therefore depend on how the different objectives are prioritized. Some of the parameters are or have the potential to be working against each other. For instance, will a high $k_2$ incentivize high consumption, while a large, negative $k_1$ will decrease battery utilization. The key to these conflicting parameters is to achieve a tuning with the right relation between the parameters.\\
 
-The cost matrix \textbf{C} contains the cost for unmet demand for every load at every time-step. An initial guide for the individual costs can be found be from the answer of the user survey mentioned in section \ref{seq:user_survey}. From the answer regarding load prioritization, it is evident that a demand from either medical sockets or medical equipment should be highly prioritized during the day, while medical lighting should be especially prioritized during nighttime. It therefor makes sense to have a cost matrix that seperates between cost at night and daytime.\\
+The cost matrix \textbf{C} contains the cost for unmet demand for every load at every time-step. An initial guide for the individual costs can be found in the answer to the user survey mentioned in section \ref{seq:user_survey}. From the answer regarding load prioritization, it is evident that demand from either medical sockets or medical equipment should be highly prioritized during the day, while medical lighting should be especially prioritized during nighttime. It therefore makes sense to have a cost matrix that separates between cost at night and daytime.\\
 
-The other parameters can be tuned by a trial and failure approach, seeing a specific tuning results in an outcome over a number of days. To make the outcome more in line with the objectives specified in section \ref{seq:specification}, the parameters corresponding to a objective can be modified.\\
+The other parameters can be tuned by a trial and failure approach, seeing specific tuning results in an outcome over a number of days. To make the outcome more in line with the objectives specified in section \ref{seq:specification}, the parameters corresponding to an objective can be modified.\\
 
 \subsection{Post-processing}\label{sec:post_processing}
-From the optimization problem specified in the previous section, an amount of energy between 0 and $R_i$ is allocated to a certain load $i$. However, this assumes that the load is dimable. For most of the circuits, this is not true. The allocation from the optimizer therefore has to be translated into a sorted priority where the controller specified in the next section can choose to satisfy the full demand or no demand from a given load. To perform this translation. The allocation from each load is divided by its demand, multiplied by its cost and sorted in decreasing order.\\ 
+From the optimization problem specified in the previous section, an amount of power between 0 and $\mathbf{R}_i$ is allocated to a certain load $i$. However, this assumes that the load is dimable. For most of the circuits, this is not true. The allocation from the optimizer therefore has to be translated into a sorted priority where the controller specified in the next section can choose to satisfy the full demand or no demand from a given load. To perform this translation. The allocation from each load is divided by its demand, multiplied by its cost and sorted in decreasing order. Furthermore, loads allocated less than some threshold, are removed from the priority list.\\ 
 
-For the flexible loads the load can run on a lower power than its minimum requirement. Hence the supply has to either be 0 or above the minimum power requirement. This is not implemented in the optimizer, hence the allocation from the optimizer has to be processed before being passed to the flexible loads. After the optimizer algorithm, a loop is included which loops through the allocation to the flexible loads and check whether it is below the minimum. If it is, the allocation is set to zero.
+For the flexible loads, the load can run on a lower power than its minimum requirement. Hence the supply has to either be 0 or above the minimum power requirement. This is not implemented in the optimizer, hence the allocation from the optimizer has to be processed before being passed to the flexible loads. After the optimizer algorithm, a loop is included which loops through the allocation to the flexible loads and checks whether it is below the minimum. If it is, the allocation is set to zero.
 
 
-\section{Control}
+\section{Control}\label{sec:controller}
 
-The controller is tasked with implementing the plan from the optimizer for each time-step. Its inputs are the actual demand, production and battery level. In addition to the allocation given to loads and the allowed charge/discharge from the battery.\\
+The controller is needed to bridge the gap between the optimizer, which runs at set intervals based on the sampling rate of measurements, and the electrical system, where demand and production are instantaneous. The controller can operate in real-time. It is tasked with implementing the plan from the optimizer for each time-step. Its inputs are the actual demand, production and battery level. The additional input is the plan from the optimizer, which includes the priority given to non-flexible loads, the allocation to the flexible loads and the allowed charge/discharge from the battery. \\
 
-The algorithm for the controller is simple. It is only to allow loads to run in a prioritized order until either the inverter capacity or the max reached by the balance equation in \ref{eq:energy_balance} is reached. Algorithm \ref{alg:controller} shows the controller algorithm. Its inputs are the instantaneous demand, the allocation of loads and battery and the inverter maximum capacity. Its outputs are the allocated power to the loads and charged/discharged from the battery.
+The algorithm of the controller is simple, fulfilling the following task:
+\begin{enumerate}
+    \item \textbf{Calculate available power to be allocated}    -   The available power to allocate to the loads is dependent on available production, and the allocation of power to/from the battery.
+    \item \textbf{Allocate power to non-flexible loads based on priority}   -   For as long as there is power available, allocate it to the non-flexible loads based on their priority from the optimizer. 
+    \item \textbf{Allocate power to flexible loads based on planned allocation} -   For as long as there is power available, allocate the demanded power to the flexible loads based on the allocation from the optimizer. 
+\end{enumerate}
 
-\begin{algorithm}
-\caption{Controller algorithm}\label{alg:controller}
-\begin{algorithmic}
-    \State$load_{tot}  \gets 0 $
-    \State$p_{available}  \gets min(p_{PV} - allocation_{battery}, inv_{max}) $
 
-    \For{i in \textit{length}(allocation)}
-        \State$demand_{load} = demand(i) $
-        \If{$load_{tot} + demand_{load} \leq p_{available}$}
-            \State$load_{tot}  = load_{tot} + demand_{load}$
-        \EndIf
-    \EndFor
-\If{$p_{b}<0$}
-    \State$p_{b} \gets max(allocation_{battery}, -load_tot)$
-\Else
-    \State$p_{b} \gets allocation_{battery}$
-\EndIf 
-\end{algorithmic}
-%\caption{The Controller algorithm. From an input}
-\end{algorithm}
 

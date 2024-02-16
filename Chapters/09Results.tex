@@ -21,7 +21,7 @@ Results from 4 different simulations using currently installed equipment are inc
     \item \textbf{Current control system}
     \item \textbf{Proposed control system with tuning 1} - Tuned for critical load reliability.
     \item \textbf{Proposed control system with tuning 2} - Tuned for battery health
-    \item \textbf{Proposed control system with tuning 2 using perfect consumption forecasts} - Unrealistic case of the control system knowing all demand perfectly in advance.
+    \item \textbf{Proposed control system with tuning 2 using perfect demand forecasts} - Unrealistic case of the control system knowing all demand perfectly in advance.
 \end{itemize}
 
 Over the same data, the current control system and proposed control system with tuning 2 are also simulated with three different levels of installed battery capacity.
@@ -29,7 +29,7 @@ Over the same data, the current control system and proposed control system with 
 \section{Simulation results}
 \subsection{Power Flow}
 
-The power flow shows the high-level flow of energy and power in the system. The consumption and production are plotted as a time-series against the primary y-axis, while the State of charge is plotted against the secondary y-axis. A higher production than consumption indicates charging of the battery, while a higher consumption than production indicates battery discharge. The plots for the current control system, tuning 1 and tuning 2 is found in figure \ref{fig:pf_231224-240101_CS_soiling26}, \ref{fig:pf_231224-240101_tuning1_soiling26} and \ref{fig:pf_231224-240101_tuning2_soiling26} respectively. 
+The power flow shows the high-level flow of power in the system. The consumption and production are plotted as a time-series against the primary y-axis, while the State of charge is plotted against the secondary y-axis. A higher production than consumption indicates the charging of the battery, while a higher consumption than production indicates battery discharge. The plots for the current control system, tuning 1 and tuning 2 is found in figure \ref{fig:pf_231224-240101_CS_soiling26}, \ref{fig:pf_231224-240101_tuning1_soiling26} and \ref{fig:pf_231224-240101_tuning2_soiling26} respectively. 
 
 \begin{figure}[h]
     \centering
@@ -55,13 +55,13 @@ The power flow shows the high-level flow of energy and power in the system. The 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/09Results/pf_231224-240101_tuning2_perfectR.png}
-    \caption[Power flow proposed control system 2 perfect consumption estimation]{Production, consumption and SOC for the proposed control system with tuning 2 using perfect consumption estimation. The horizontal red stapled lines are thresholds for the battery. }
+    \caption[Power flow proposed control system 2 perfect demand estimation]{Production, consumption and SOC for the proposed control system with tuning 2 using perfect demand estimation. The horizontal red stapled lines are thresholds for the battery. }
     \label{fig:pf_231224-240101_tuning2_perfectR}
 \end{figure}
 
 \subsection{Unmet Demand}
 
-Unmet demand is when a load has requested a certain amount of energy, but has not been supplied it. In figure \ref{fig:error_231224-240101_CS_soiling26}, \ref{fig:error_231224-240101_tuning1_soiling26} and \ref{fig:error_231224-240101_tuning2_soiling26} the unmet demand is plotted with its magnitude and time of occurrence for the current control system, tuning 1 and tuning 2 respectively. In figure \ref{fig:error_perc_231224-240101_CS_soiling26}, \ref{fig:error_perc_231224-240101_tuning1_soiling26} and \ref{fig:error_perc_231224-240101_tuning2_soiling26} the amount of times a load has its demand unmet as a ratio to the total length of the simulation is graphed.
+Unmet demand is when a load has requested a certain amount of power, but has not been supplied it. In figure \ref{fig:error_231224-240101_CS_soiling26}, \ref{fig:error_231224-240101_tuning1_soiling26} and \ref{fig:error_231224-240101_tuning2_soiling26} the unmet demand is plotted with its magnitude and time of occurrence for the current control system, tuning 1 and tuning 2 respectively. In figure \ref{fig:error_perc_231224-240101_CS_soiling26}, \ref{fig:error_perc_231224-240101_tuning1_soiling26} and \ref{fig:error_perc_231224-240101_tuning2_soiling26} the amount of times a load has its demand unmet as a ratio to the total length of the simulation is graphed.
 
 \begin{figure}[h]
     \centering
@@ -87,7 +87,7 @@ Unmet demand is when a load has requested a certain amount of energy, but has no
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/09Results/error_231224-240101_tuning2_perfectR.png}
-    \caption[Unmet demand proposed control system 2 perfect R]{Unmet demand across the period for the proposed control system with tuning 2 using perfect consumption estimation. }
+    \caption[Unmet demand proposed control system 2 perfect R]{Unmet demand across the period for the proposed control system with tuning 2 using perfect demand estimation. }
     \label{fig:error_231224-240101_tuning2_perfectR}
 \end{figure}
 
@@ -115,7 +115,7 @@ Unmet demand is when a load has requested a certain amount of energy, but has no
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/09Results/error_perc_231224-240101_tuning2_perfectR.png}
-    \caption[Unmet demand portion proposed control system 2 perfect R]{Number of times demand was unmet as a percentage of the whole period for the proposed control system with tuning 2 using perfect consumption estimation. }
+    \caption[Unmet demand portion proposed control system 2 perfect R]{Number of times demand was unmet as a percentage of the whole period for the proposed control system with tuning 2 using perfect demand estimation. }
     \label{fig:error_perc_231224-240101_tuning2_perfectR}
 \end{figure}
 
@@ -148,7 +148,7 @@ The battery health with regards to how often the State of Charge is at the minim
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/09Results/bANDpb02_231224-240101_tuning2_perfectR.png}
-    \caption[Battery results proposed control system 2 perfect R]{Number of times battery was in unhealthy states as a percentage of the whole period for the proposed control system with tuning2 using perfect consumption estimation. }
+    \caption[Battery results proposed control system 2 perfect R]{Number of times battery was in unhealthy states as a percentage of the whole period for the proposed control system with tuning2 using perfect demand estimation. }
     \label{fig:bANDpb02_231224-240101_tuning2_perfectR}
 \end{figure}
 
@@ -159,14 +159,14 @@ Flexible loads have a requested energy demand within the day. Figure \ref{fig:er
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/09Results/error_def_231224-240101_CS_soiling26.png}
-    \caption[Flexible load deviation current control system]{The deviation from flexible load energy request each day for the current control system. This plot indicates no deviation from flexible load demand by supply. }
+    \caption[Flexible load deviation current control system]{The deviation from flexible load energy demand each day for the current control system. This plot indicates no deviation from flexible load demand by supply. }
     \label{fig:error_def_231224-240101_CS_soiling26}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/09Results/error_def_231224-240101_tuning1_soiling26.png}
-    \caption[Flexible load deviation proposed control system 1]{The deviation from flexible load energy request each day for the proposed control system with tuning 1. }
+    \caption[Flexible load deviation proposed control system 1]{The deviation from flexible load energy demand each day for the proposed control system with tuning 1. }
     \label{fig:error_def_231224-240101_tuning1_soiling26}
 \end{figure}
 
@@ -180,7 +180,7 @@ Flexible loads have a requested energy demand within the day. Figure \ref{fig:er
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/09Results/error_def_231224-240101_tuning2_perfectR.png}
-    \caption[Flexible load deviation proposed control system 2 perfect R]{The deviation from flexible load energy demand each day for the proposed control system with tuning 2 using perfect consumption estimation. }
+    \caption[Flexible load deviation proposed control system 2 perfect R]{The deviation from flexible load energy demand each day for the proposed control system with tuning 2 using perfect demand estimation. }
     \label{fig:error_def_231224-240101_tuning2_perfectR}
 \end{figure}
 
@@ -212,7 +212,7 @@ Figure \ref{fig:prod_231224-240101_CS_soiling26}, \ref{fig:prod_231224-240101_tu
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{Figures/09Results/prod_231224-240101_tuning2_perfectR.png}
-    \caption[Potential and utilized production proposed control system 2 perfect R]{Potential and utilized production for each day for the proposed control system with tuning 2 using perfect consumption estimation. }
+    \caption[Potential and utilized production proposed control system 2 perfect R]{Potential and utilized production for each day for the proposed control system with tuning 2 using perfect demand estimation. }
     \label{fig:prod_231224-240101_tuning2_perfectR}
 \end{figure}
 
@@ -256,7 +256,7 @@ Table \ref{tab:combined_results_load} shows the combined results for the simulat
        Tuning2 perfect forecast & 0.91 & 10.53 & 15.73 & 4.68\\
        
     \end{tabular}
-    \caption[Simulation results - Battery]{The combined simulation results relating to battery health. In the table $b$ is the SOC while $pb$ is the charge/discharge-rate.}
+    \caption[Simulation results - Battery]{The combined simulation results relating to battery health. In the table, $b$ is the SOC while $pb$ is the charge/discharge-rate.}
     \label{tab:combined_results_battery}
 \end{table}
 

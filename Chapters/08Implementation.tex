@@ -34,13 +34,13 @@ In the implementation, consumption data was collected with a \textbf{15-minute} 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Figures/08Implementation/control_as_is_overview.png}
-    \caption[Current control system block chart]{Chart showing the main components and signals of the current control system in simulation. $p$ - production at ts, $r$ - demand at ts, $b$ - battery capacity at ts, $pb$ - power to/from the battery, $charge(ON/OFF)$ - control signal to shut down battery charging. The $charge(ON/OFF)$ mechanism is highlighted in the battery control system shown in figure \ref{fig:current_battery_control_FSM}. The loop with ALLOC FL* and ALLOC FL through the integrator is to prevent the allocation to the flexible loads to exceed daily demand.}
+    \caption[Current control system block chart]{Chart showing the main components and signals of the current control system in simulation. $p$ - production at ts, $r$ - demand at ts, $b$ - battery capacity at ts, $pb$ - power to/from the battery, $chargeON$ - control signal to shut down battery charging. The $chargeON$ mechanism is highlighted in the battery control system shown in figure \ref{fig:current_battery_control_FSM}. The loop with ALLOC FL* and ALLOC FL through the integrator is to prevent the allocation to the flexible loads from exceeding daily demand.}
     \label{fig:control_as_is_overview}
 \end{figure}
 
 
 \section{Battery Module}
-The battery itself is simply modelled by an integrator integrating a saturated signal. The signal is saturated so that it cannot exceed the maximum charge/discharge rate of the battery. The integrator is also saturated to not exceed the max or min capacity of the battery. In addition, as the controller has a 15-min resolution, a block is added to convert this to hour resolution because the battery capacity is defined in watts per hour (W/h).
+The battery itself is simply modelled by an integrator integrating a saturated signal. The signal is saturated so that it cannot exceed the maximum charge/discharge rate of the battery. The integrator is also saturated to not exceed the max or minimum capacity of the battery. In addition, as the controller has a 15-min resolution, a block is added to convert this to hourly resolution because the battery capacity is defined in watts per hour (W/h).
 
 \begin{figure}
     \centering
@@ -51,7 +51,7 @@ The battery itself is simply modelled by an integrator integrating a saturated s
 
 \section{Load Forecaster}
 
-The load forecaster consist of the forecast block implementing the load forecasting algorithm outlined in section \ref{seq:load_forecasting}. This is wrapped in a feedback loop using a PID controller. A new forecast is made using the forecasting algorithm once every hour, the consumption is however measured every 15 minutes. In between the forecast the PID controller reduces the error between demand and the forecast until a new forecast is made. The algorithm shown in \ref{alg:load_forecast} shows the internal of the forecast block.
+The load forecaster consists of the forecast block implementing the load forecasting algorithm outlined in section \ref{seq:load_forecasting}. This is wrapped in a feedback loop using a PID controller. A new forecast is made using the forecasting algorithm once every hour, the consumption is however measured every 15 minutes. In between the forecasts, the PID controller reduces the error between demand and the forecast until a new forecast is made. The algorithm shown in \ref{alg:load_forecast} shows the internal of the forecast block. The forecaster yields a forecast over the whole prediction horizon. The first element of this forecast is extracted out and used in the feed-back loop.
 
 \begin{figure}
     \centering
@@ -61,22 +61,20 @@ The load forecaster consist of the forecast block implementing the load forecast
 \end{figure}
 
 \begin{algorithm}
-\caption{Load forecaster algorithm}\label{alg:load_forecast}
+\caption{Load forecaster algorithm (Pseudocode)}\label{alg:load_forecast}
 \begin{algorithmic}
-    \State$intitalize(historicData, coefficients,\hat{R}_0,predictionHorizon) $
-    \State$r_t,u_t  \gets r_t, u_t $
 
-\If{ts==hour}
-    \State$historicData \gets [historicData,r_t]$
+\If{simulationTime==wholeHour}  \Comment{Only forecast every hour}
+    \State$historicData \gets [historicData,r_{t-1}]$
     \State$forecastData \gets arimaForecast(historicData,coefficients,predictionHorizon)$
-\EndIf
+\EndIf\\
     \State$\hat{R}_t = forecastData + u_t $
-    \State$\hat{r}_t = \hat{R}_t(:,1)$
+    \State$\hat{r}_t = \hat{R}_t(:,1)$  \Comment{Extract first estimate}
 \end{algorithmic}
 \end{algorithm}
 
 \section{Production Forecaster}
-The production forecaster has an identical internal layout to the forecast block. Also here the forecast algorithm from section \ref{seq:prod_forecasting} is wrapped in a feedback loop with an PID control to minimize error while until the next forecast is made. Algorithm \ref{alg:prod_forecast} shows the internal of the forecast block of the production forecaster module.
+The production forecaster has an identical internal layout to the forecast block. Also here the forecast algorithm from section \ref{seq:prod_forecasting} is wrapped in a feedback loop with a PID control to minimize error until the next forecast is made. Algorithm \ref{alg:prod_forecast} shows the internal of the forecast block of the production forecaster module. The forecaster yields a forecast over the whole prediction horizon. The first element of this forecast is extracted out and used in the feed-back loop.
 
 \begin{figure}
     \centering
@@ -86,94 +84,122 @@ The production forecaster has an identical internal layout to the forecast block
 \end{figure}
 
 \begin{algorithm}
-\caption{Production forecaster algorithm}\label{alg:prod_forecast}
+\caption{Production forecaster algorithm (Pseudocode)}\label{alg:prod_forecast}
 \begin{algorithmic}
-    \State$intitalize(historicData, coefficients,\hat{P}_0,predictionHorizon) $
-    \State$p_t,u_t  \gets p_t, u_t $
-
-\If{ts==hour}
-    \State$historicData \gets [historicData,p_t]$
+    
+\If{simulationTime==wholeHour}  \Comment{Only forecast every hour}
+    \State$historicData \gets [historicData,p_{t-1}]$
     \State$forecastData \gets modelForecast(historicData,coefficients,predictionHorizon)$
-\EndIf
+\EndIf\\
     \State$\hat{P}_t = forecastData + u_t $
-    \State$\hat{r}_t = \hat{P}_t(:,1)$
+    \State$\hat{r}_t = \hat{P}_t(:,1)$  \Comment{Extract first estimate}
 \end{algorithmic}
 \end{algorithm}
 
 
 
 \section{Optimizer}
-The optimizer implements the design from \ref{sec:optimization}. The optimizer algorithm including the non-linear optimization and post-processing is outlined in algorithm \ref{alg:optimizer}. The non-linear optimization is performed using Matlabs \textit{fmincon} with the 'interior-point' algorithm.
+The optimizer implements the design from \ref{sec:optimization}. The optimizer algorithm including the non-linear optimization and post-processing is outlined in algorithm \ref{alg:optimizer}. The non-linear optimization is performed using Matlabs \textit{fmincon} with the 'interior-point' algorithm. the output from the optimizer is the priority given to non-flexible loads, Priority NFL, the allocation to flexible loads, Alloc FL, and the allocation to/from the battery, Alloc pb
 
 \begin{algorithm}
-\caption{Optimizer algorithm}\label{alg:optimizer}
+\caption{Optimizer algorithm (Pseudocode)}\label{alg:optimizer}
 \begin{algorithmic}
-    \State$\hat{R},\hat{P},b  \gets \hat{R}_t,\hat{P}_t,b_t$ 
-    \State$C, K \gets C, K $
+    \State$\hat{R},\hat{P},b  \gets \hat{R}_t,\hat{P}_t,b_t$                        \Comment{Get signals}
+    \State$C, K \gets C, K $                                                        \Comment{Get constants}\\
     
-\If{ts==hour}
-    \State$@(x)constraints \gets constraints(\hat{P},b)$
-    \State$@(x)objectiveFunction \gets objectiveFunction(\hat{R},C,b,K)$
-    \State$L^*,pb^* = optimize(objectiveFunction, constraints)$
-    \State$allocNFL_{ts},allocFL_{ts} \gets splitFlexAndNonFlexLoads(L^*)$
+\If{simulationTime==wholeHour}                                                      \Comment{Only optimize every hour}
+    \State$constraints \gets constraints(\hat{P},b)$                                \Comment{Set constraint function}
+    \State$objectiveFunction \gets objectiveFunction(\hat{R},C,b,K)$                \Comment{Set objective}
+    \State$L,pb' = optimize(objectiveFunction, constraints)$
+    \State$allocNFL,allocFL \gets splitFlexAndNonFlexLoads(L)$
     \\
-    \State$priorityNFL_{ts} \gets allocNFL_{ts}\div\hat{R}(1:n_{NFL},1)$
-    \State$priorityNFL,priorityIndex = sort(priorityNFL,descending)$
+    \State$priorityNFL \gets sort(allocNFL\div\hat{R}(1))$                          \Comment{Find priority NFL}\\
+    
 
-    \For{$\text{i in length}(allocFL_{ts})$}
-        \State$flexLoad = allocFL_{ts}(i) $
-        \If{$flexLoad \leq flexLoadMinW$}
-            \State$allocFlexLoad(i) = flexLoad$
+    \For{$\text{flexLoad in }(allocFL)$}                                            \Comment{Find allocation FL}
+        \If{$flexLoad \geq flexLoadMinW$}
+            \State$allocFL(flexLoad) = flexLoad$
         \Else
-            \State$allocFlexLoad(i) = 0$
+            \State$allocFL(flexLoad) = 0$
         \EndIf
     \EndFor\\
     
-    \State$pb \gets pb^*(1)$\\
+    \State$\text{Alloc pb} \gets pb'(1)$                                                         \Comment{Extract first battery allocation}\\
 
-    \State  $Out \gets priorityIndex,  allocFlexLoad,  pb$
+    \State  $Out \gets priorityNFL,  allocFL,  \text{Alloc pb}$
 \EndIf
 \end{algorithmic}
 \end{algorithm}
 
 \section{Controller current control system}
-The controller for the current control system includes both the controller itself and the integrator in figure \ref{fig:control_as_is_overview}. The integrator is included to stop the flexible loads from exceeding their demand. \ref{alg:current_control}
+The controller for the current control system includes both the controller itself and the integrator in figure \ref{fig:control_as_is_overview}. The integrator is included to stop the flexible loads from exceeding their demand. The current control system algorithm is shown in algorithm \ref{alg:current_control}.
 
 \begin{algorithm}
-\caption{Current Control Algorithm}\label{alg:current_control}
+\caption{Current Control Algorithm (Pseudocode)}\label{alg:current_control}
     \begin{algorithmic}
-        \State $\text{IN} \gets \text{\textit{inv\_max}, \textit{b\_min}, \textit{b\_max}, \textit{pb\_min}, \textit{pb\_max}}$ \Comment{Fetch Constants}
-        \State $\text{IN} \gets \text{\textit{r}, \textit{p}, \textit{b}, \textit{time}}$   \Comment{Fetch signals}    
     
-        \State $\text{p\_load} \gets p + \min([\text{pb\_max}, (b - \text{b\_min})])$
-        \State $\text{p\_load} \gets \min([\text{inv\_max}, \text{p\_load}])$
+        \State $p_b' \gets \min([\text{pb\_max}, (b - \text{b\_min})])$
+        \State $\text{p\_load} \gets p + p_b'$
+        \State $\text{p\_load} \gets \min([\text{inv\_max}, \text{p\_load}])$       \Comment{Calculate available power}\\
+        
     
-        \For{$i \gets 1 \text{ to } (\text{length}(r) - n\_defer\_loads)$}
-            \State $\text{add\_load} \gets r(i)$
-            \State $\text{add\_load\_id} \gets i$
-            \If{$(\text{p\_load} - \text{add\_load}) > 0$}
-                \State $\text{load}(\text{add\_load\_id}) \gets \text{add\_load}$
-                \State $\text{p\_load} \gets \text{p\_load} - \text{add\_load}$
+        \For{demandLoad in r}                                           \Comment{Add load if available power} 
+            \If{$(\text{p\_load} - \text{demandLoad}) > 0$}
+                \State loadON $\gets$ demandLoad
+                \State $\text{p\_load} \gets (\text{p\_load} - \text{demandLoad}) $       \Comment{Reduce available power}
             \EndIf
-        \EndFor
+        \EndFor\\
     
-        \For{flexible Loads $f$}
-            \If{$\text{time} \in f\_run\_interval$}
-                \State $\text{add\_load\_id} \gets f\_load$
-                \If{$(\text{p\_load} - \text{add\_load}) > 0$}
-                    \State $\text{load}(\text{add\_load\_id}) \gets \text{add\_load}$
-                    \State $\text{p\_load} \gets \text{p\_load} - \text{add\_load}$
+        \For{f in flexibleLoads}
+            \If{$\text{simulationTime} \in f\_run\_interval$}                       \Comment{Check if load set to run} 
+                \If{$(\text{p\_load} - \text{f}) > 0$}
+                    \State $\text{loadON} \gets f $                                   \Comment{Add load if available power} 
+                    \State $\text{p\_load} \gets (\text{p\_load} - \text{f}) $       \Comment{Reduce available power}
                 \EndIf
             \EndIf
-        \EndFor
+        \EndFor\\
+
+        \State $p_b \gets (\text{p\_load - loadON})$\\
         
-        \If{$b \geq \text{b\_max} \times 0.9$ \textbf{and} $p > \text{p\_load}$ \textbf{and} $\text{mod}(ts, 24) < 15$}
-            \State $\text{battery\_charge\_stop} \gets 0$
-        \EndIf
-        \State{Output $\gets \text{load}, \text{battery\_charge\_stop}$}
+        \If{$b \geq \text{b\_max} \times 0.9$ \textbf{and} $\text{simulationTime} < 15$}
+            \State $\text{chargeON} \gets 0$                               \Comment{Stop charge ref. \ref{fig:current_battery_control_FSM}} 
+        \EndIf\\
+        \State{Out $\gets \text{loadON },p_b, \text{ chargeON}$}
     \end{algorithmic}
 \end{algorithm}
 
 
 \section{Controller}
-The controller in the proposed control system implements the first step of the plan from the optimizer. It is shown in algorithm \ref{alg:controller}.
+In the simulation, the controller implements the plan from the optimizer continuously until a new plan is received. The algorithm is shown in algorithm \ref{alg:controller}. In addition to the steps outlined in section \ref{sec:controller}, an additional step is added for the simulation to reduce the draining of the battery to be no larger than the power consumed by the loads. 
+
+Algorithm \ref{alg:controller} shows the controller algorithm. Its inputs are the instantaneous demand, production, battery SOC, the priority of non-flexible loads, the allocation to flexible loads and allocation to/from the battery. In the simulation, its outputs are the allocated power to the loads and charged/discharged from the battery. 
+
+\begin{algorithm}
+\caption{Controller algorithm (Pseudocode)}\label{alg:controller}
+\begin{algorithmic}
+    \State$p_b'  \gets \text{min(Alloc pb, b)}$
+    \State$p_{available}  \gets \text{min(p - $p_b'$, $inv_{max}$)}$               \Comment{Calculate available power}\\
+    
+    \For{demand in priorityNFL}
+        \If{$totalLoad + demand \leq p_{available}$}
+            \State$totalLoad  = totalLoad + demand_{load}$
+            \State$loadON  \gets \text{priorityNFL(demand)}$                    \Comment{Allow load to run}
+        \EndIf
+    \EndFor\\
+
+    \For{demand in AllocFL}
+        \If{$totalLoad + demand \leq p_{available}$}
+            \State$totalLoad  = totalLoad + demand_{load}$
+            \State$loadON  \gets \text{AllocFL(demand)}$                    \Comment{Allow load to run at allocated power}
+        \EndIf
+    \EndFor\\
+    
+\If{$p_{b}<0$}
+    \State$p_{b} \gets \text{max($p_b'$, -totalLoad)}$
+\Else
+    \State$p_{b} \gets p_b' $
+\EndIf\\
+\State{Out $\gets p_b$,\text{ loadON}}
+\end{algorithmic}
+%\caption{The Controller algorithm. From an input}
+\end{algorithm}
